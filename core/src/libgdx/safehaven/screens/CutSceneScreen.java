@@ -244,7 +244,8 @@ public class CutSceneScreen extends MainGameScreen {
 				new Runnable() {
 					@Override
 					public void run() {
-						showMessage("BLACKSMITH: We have planned this long enough. The time is now! I have had enough " +
+						showMessage("BLACKSMITH: We have planned this long enough. The time is now! I have had enough" +
+							" " +
 							"talk...");
 					}
 				}),
@@ -262,7 +263,8 @@ public class CutSceneScreen extends MainGameScreen {
 				new Runnable() {
 					@Override
 					public void run() {
-						showMessage("INNKEEPER: Both of you need to keep it down. If we get caught using black magic, " +
+						showMessage("INNKEEPER: Both of you need to keep it down. If we get caught using black magic," +
+							" " +
 							"we will all be hanged!");
 					}
 				}),
@@ -278,7 +280,8 @@ public class CutSceneScreen extends MainGameScreen {
 				new Runnable() {
 					@Override
 					public void run() {
-						showMessage("BLACKSMITH: Now, let's get on with this. I don't like the cemeteries very much.." +
+						showMessage("BLACKSMITH: Now, let's get on with this. I don't like the cemeteries very much." +
+							"." +
 							".");
 					}
 				}
@@ -387,13 +390,6 @@ public class CutSceneScreen extends MainGameScreen {
 	}
 
 	@Override
-	public void hide() {
-		notify(AudioObserver.AudioCommand.MUSIC_STOP, AudioObserver.AudioTypeEvent.MUSIC_INTRO_CUTSCENE);
-		ProfileManager.getInstance().removeAllObservers();
-		Gdx.input.setInputProcessor(null);
-	}
-
-	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -420,6 +416,13 @@ public class CutSceneScreen extends MainGameScreen {
 
 		_stage.act(delta);
 		_stage.draw();
+	}
+
+	@Override
+	public void hide() {
+		notify(AudioObserver.AudioCommand.MUSIC_STOP, AudioObserver.AudioTypeEvent.MUSIC_INTRO_CUTSCENE);
+		ProfileManager.getInstance().removeAllObservers();
+		Gdx.input.setInputProcessor(null);
 	}
 
 

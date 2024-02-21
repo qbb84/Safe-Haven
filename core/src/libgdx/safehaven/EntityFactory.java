@@ -18,6 +18,7 @@ public class EntityFactory {
 	public static String ENVIRONMENTAL_ENTITY_CONFIGS = "scripts/environmental_entities.json";
 	private static EntityFactory _instance = null;
 	private final Hashtable<String, EntityConfig> _entities;
+
 	private EntityFactory() {
 		_entities = new Hashtable<String, EntityConfig>();
 

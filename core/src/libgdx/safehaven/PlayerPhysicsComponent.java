@@ -182,7 +182,8 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
 						//Gdx.app.debug(TAG, "Enemy Spawn Area already activated " + enemySpawnID);
 						return true;
 					} else {
-						Gdx.app.debug(TAG, "Enemy Spawn Area " + enemySpawnID + " Activated with previous Spawn value:" +
+						Gdx.app.debug(TAG, "Enemy Spawn Area " + enemySpawnID + " Activated with previous Spawn " +
+							"value:" +
 							" " + _previousEnemySpawn);
 						_previousEnemySpawn = enemySpawnID;
 					}

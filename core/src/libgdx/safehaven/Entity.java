@@ -27,6 +27,7 @@ public class Entity {
 	private InputComponent _inputComponent;
 	private GraphicsComponent _graphicsComponent;
 	private PhysicsComponent _physicsComponent;
+
 	public Entity(Entity entity) {
 		set(entity);
 	}
@@ -49,6 +50,7 @@ public class Entity {
 		_entityConfig = new EntityConfig(entity._entityConfig);
 		return this;
 	}
+
 	public Entity(InputComponent inputComponent, PhysicsComponent physicsComponent,
 				  GraphicsComponent graphicsComponent) {
 		_entityConfig = new EntityConfig();

@@ -8,6 +8,7 @@ public class QuestTask {
 	private String id;
 	private String taskPhrase;
 	private QuestType questType;
+
 	public QuestTask() {
 		taskProperties = new ObjectMap<String, Object>();
 	}

@@ -44,7 +44,8 @@ public class BattleState extends BattleSubject implements InventoryObserver {
 				currentOpponentHP = MathUtils.clamp(currentOpponentHP - damage, 0, currentOpponentHP);
 				_currentOpponent.getEntityConfig().setPropertyValue(EntityConfig.EntityProperties.ENTITY_HEALTH_POINTS.toString(), String.valueOf(currentOpponentHP));
 
-				Gdx.app.debug(TAG, "Player attacks " + _currentOpponent.getEntityConfig().getEntityID() + " leaving it" +
+				Gdx.app.debug(TAG, "Player attacks " + _currentOpponent.getEntityConfig().getEntityID() + " leaving " +
+					"it" +
 					" with HP: " + currentOpponentHP);
 
 				_currentOpponent.getEntityConfig().setPropertyValue(EntityConfig.EntityProperties.ENTITY_HIT_DAMAGE_TOTAL.toString(), String.valueOf(damage));
@@ -85,7 +86,8 @@ public class BattleState extends BattleSubject implements InventoryObserver {
 				}
 
 				Gdx.app.debug(TAG,
-					"Player HIT for " + damage + " BY " + _currentOpponent.getEntityConfig().getEntityID() + " leaving" +
+					"Player HIT for " + damage + " BY " + _currentOpponent.getEntityConfig().getEntityID() + " " +
+						"leaving" +
 						" player with HP: " + hpVal);
 
 				BattleState.this.notify(_currentOpponent, BattleObserver.BattleEvent.OPPONENT_TURN_DONE);

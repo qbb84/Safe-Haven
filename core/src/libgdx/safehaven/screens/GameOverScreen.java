@@ -14,7 +14,8 @@ import libgdx.safehaven.Utility;
 import libgdx.safehaven.audio.AudioObserver;
 
 public class GameOverScreen extends GameScreen {
-	private static final String DEATH_MESSAGE = "You have fought bravely, but alas, you have fallen during your epic " +
+	private static final String DEATH_MESSAGE = "You have fought bravely, but alas, you have fallen during your epic" +
+		" " +
 		"struggle.";
 	private static final String GAMEOVER = "Game Over";
 	private final Stage _stage;

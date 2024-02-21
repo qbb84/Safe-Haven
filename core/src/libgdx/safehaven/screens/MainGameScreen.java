@@ -25,6 +25,7 @@ public class MainGameScreen extends GameScreen {
 	protected MapManager _mapMgr;
 	protected OrthographicCamera _camera = null;
 	protected OrthographicCamera _hudCamera = null;
+
 	public MainGameScreen(SafeHaven game) {
 		_game = game;
 		_mapMgr = new MapManager();

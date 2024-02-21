@@ -23,6 +23,7 @@ public abstract class PhysicsComponent extends ComponentSubject implements Compo
 	protected Array<Entity> _tempEntities;
 	protected BoundingBoxLocation _boundingBoxLocation;
 	protected Ray _selectionRay;
+
 	PhysicsComponent() {
 		this._nextEntityPosition = new Vector2(0, 0);
 		this._currentEntityPosition = new Vector2(0, 0);

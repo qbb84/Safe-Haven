@@ -12,6 +12,7 @@ public class InventoryItem extends Image {
 	private ItemTypeID itemTypeID;
 	private String itemShortDescription;
 	private int itemValue;
+
 	public InventoryItem(TextureRegion textureRegion, int itemAttributes, ItemTypeID itemTypeID, int itemUseType,
 						 int itemUseTypeValue, int itemValue) {
 		super(textureRegion);
@@ -22,9 +23,11 @@ public class InventoryItem extends Image {
 		this.itemUseTypeValue = itemUseTypeValue;
 		this.itemValue = itemValue;
 	}
+
 	public InventoryItem() {
 		super();
 	}
+
 	public InventoryItem(InventoryItem inventoryItem) {
 		super();
 		this.itemTypeID = inventoryItem.getItemTypeID();

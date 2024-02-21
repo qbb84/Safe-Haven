@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 public class ScreenTransitionAction extends Action {
 	private ScreenTransitionType _transitionType = ScreenTransitionType.NONE;
 	private float _transitionDuration = 3;
+
 	public ScreenTransitionAction() {
 	}
 

@@ -19,9 +19,9 @@ public class BattleState extends BattleSubject implements InventoryObserver {
     private final int _chanceOfAttack = 25;
     private final int _chanceOfEscape = 40;
     private final int _criticalChance = 90;
-    private Timer.Task _playerAttackCalculations;
-    private Timer.Task _opponentAttackCalculations;
-    private Timer.Task _checkPlayerMagicUse;
+	private final Timer.Task _playerAttackCalculations;
+	private final Timer.Task _opponentAttackCalculations;
+	private final Timer.Task _checkPlayerMagicUse;
 
     public BattleState(){
         _playerAttackCalculations = getPlayerAttackCalculationTimer();
@@ -85,7 +85,6 @@ public class BattleState extends BattleSubject implements InventoryObserver {
             }
         }else if(_currentPlayerWandAPPoints > mpVal ){
             BattleState.this.notify(_currentOpponent, BattleObserver.BattleEvent.PLAYER_TURN_DONE);
-            return;
         }else{
             if( !_checkPlayerMagicUse.isScheduled() && !_playerAttackCalculations.isScheduled() ){
                 Timer.schedule(_checkPlayerMagicUse, .5f);
@@ -181,7 +180,6 @@ public class BattleState extends BattleSubject implements InventoryObserver {
         }else if (randomVal > _criticalChance){
             opponentAttacks();
         }else{
-            return;
         }
     }
 

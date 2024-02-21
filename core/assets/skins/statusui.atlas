@@ -3,13 +3,6 @@ statusui.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-bludbourne_title
-  rotate: false
-  xy: 1, 46
-  size: 300, 30
-  orig: 300, 30
-  offset: 0, 0
-  index: -1
 Bar
   rotate: false
   xy: 1, 13

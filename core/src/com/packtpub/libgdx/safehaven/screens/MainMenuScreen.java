@@ -4,20 +4,18 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.packtpub.libgdx.safehaven.SafeHaven;
 import com.packtpub.libgdx.safehaven.SafeHaven.ScreenType;
-import com.packtpub.libgdx.safehaven.SafeHaven;
-import com.packtpub.libgdx.safehaven.SafeHaven;
 import com.packtpub.libgdx.safehaven.Utility;
 import com.packtpub.libgdx.safehaven.audio.AudioObserver;
 
 public class MainMenuScreen extends GameScreen {
 
-	private Stage _stage;
-	private SafeHaven _game;
+	private final Stage _stage;
+	private final SafeHaven _game;
 
 	public MainMenuScreen(SafeHaven game){
 		_game = game;
@@ -27,7 +25,6 @@ public class MainMenuScreen extends GameScreen {
 		Table table = new Table();
 		table.setFillParent(true);
 
-		Image title = new Image(Utility.STATUSUI_TEXTUREATLAS.findRegion("bludbourne_title"));
 		TextButton newGameButton = new TextButton("New Game", Utility.STATUSUI_SKIN);
 		TextButton loadGameButton = new TextButton("Load Game", Utility.STATUSUI_SKIN);
 		TextButton watchIntroButton = new TextButton("Watch Intro", Utility.STATUSUI_SKIN);
@@ -36,7 +33,6 @@ public class MainMenuScreen extends GameScreen {
 
 
 		//Layout
-		table.add(title).spaceBottom(75).row();
 		table.add(newGameButton).spaceBottom(10).row();
 		table.add(loadGameButton).spaceBottom(10).row();
 		table.add(watchIntroButton).spaceBottom(10).row();

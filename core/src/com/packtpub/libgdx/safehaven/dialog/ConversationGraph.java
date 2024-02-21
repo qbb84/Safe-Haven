@@ -58,8 +58,7 @@ public class ConversationGraph extends ConversationGraphSubject {
 
     public boolean isValid(String conversationID){
         Conversation conversation = conversations.get(conversationID);
-        if( conversation == null ) return false;
-        return true;
+		return conversation != null;
     }
 
     public boolean isReachable(String sourceID, String sinkID){

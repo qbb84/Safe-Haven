@@ -4,8 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Rectangle;
@@ -33,11 +33,7 @@ public class NPCGraphicsComponent extends GraphicsComponent {
 
         if( string.length == 1 ) {
             if (string[0].equalsIgnoreCase(MESSAGE.ENTITY_SELECTED.toString())) {
-                if( _wasSelected ){
-                    _isSelected = false;
-                }else{
-                    _isSelected = true;
-                }
+				_isSelected = !_wasSelected;
             }else if (string[0].equalsIgnoreCase(MESSAGE.ENTITY_DESELECTED.toString())) {
                 _wasSelected = _isSelected;
                 _isSelected = false;
@@ -83,13 +79,13 @@ public class NPCGraphicsComponent extends GraphicsComponent {
         if( _isSelected ){
             drawSelected(entity, mapMgr);
             mapMgr.setCurrentSelectedMapEntity(entity);
-            if( _sentShowConversationMessage == false){
+			if (!_sentShowConversationMessage) {
                 notify(_json.toJson(entity.getEntityConfig()), ComponentObserver.ComponentEvent.SHOW_CONVERSATION);
                 _sentShowConversationMessage = true;
                 _sentHideCoversationMessage = false;
             }
         }else{
-            if( _sentHideCoversationMessage == false ){
+			if (!_sentHideCoversationMessage) {
                 notify(_json.toJson(entity.getEntityConfig()), ComponentObserver.ComponentEvent.HIDE_CONVERSATION);
                 _sentHideCoversationMessage = true;
                 _sentShowConversationMessage = false;

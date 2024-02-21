@@ -3,7 +3,7 @@ package com.packtpub.libgdx.safehaven.battle;
 import com.packtpub.libgdx.safehaven.Entity;
 
 public interface BattleObserver {
-    public static enum BattleEvent{
+	enum BattleEvent {
         OPPONENT_ADDED,
         OPPONENT_HIT_DAMAGE,
         OPPONENT_DEFEATED,

@@ -6,15 +6,10 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.packtpub.libgdx.safehaven.Entity;
 import com.packtpub.libgdx.safehaven.EntityConfig;
-import com.packtpub.libgdx.safehaven.Map;
 import com.packtpub.libgdx.safehaven.MapManager;
 import com.packtpub.libgdx.safehaven.profile.ProfileManager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.Set;
+import java.util.*;
 
 public class QuestGraph {
     private static final String TAG = QuestGraph.class.getSimpleName();
@@ -102,8 +97,7 @@ public class QuestGraph {
 
     public boolean isValid(String taskID){
         QuestTask questTask = questTasks.get(taskID);
-        if( questTask == null ) return false;
-        return true;
+		return questTask != null;
     }
 
     public boolean isReachable(String sourceID, String sinkID){
@@ -159,11 +153,7 @@ public class QuestGraph {
         if( task == null) return false;
         ArrayList<QuestTaskDependency> list = questTaskDependencies.get(id);
 
-        if( list.isEmpty() || list.size() == 0){
-            return false;
-        }else{
-            return true;
-        }
+		return !list.isEmpty() && list.size() != 0;
     }
 
     public boolean updateQuestForReturn(){
@@ -236,7 +226,7 @@ public class QuestGraph {
                     if( questItemPositions.size == 0 ){
                         questTask.setTaskComplete();
                         Gdx.app.debug(TAG, "TASK : " + questTask.getId() + " is complete of Quest: " + questID);
-                        Gdx.app.debug(TAG, "INFO : " + QuestTask.QuestTaskPropertyType.TARGET_TYPE.toString());
+						Gdx.app.debug(TAG, "INFO : " + QuestTask.QuestTaskPropertyType.TARGET_TYPE);
                     }
                     break;
                 case KILL:

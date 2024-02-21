@@ -7,8 +7,8 @@ import com.packtpub.libgdx.safehaven.InventoryItem;
 
 public class InventorySlotTooltip extends Window {
 
-    private Skin _skin;
-    private Label _description;
+	private final Skin _skin;
+	private final Label _description;
 
     public InventorySlotTooltip(final Skin skin){
         super("", skin);

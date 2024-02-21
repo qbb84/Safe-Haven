@@ -5,16 +5,16 @@ import com.badlogic.gdx.math.Vector2;
 
 public class ShakeCamera {
 	private static final String TAG = ShakeCamera.class.getSimpleName();
-	
+
 	private boolean _isShaking = false;
 	private float _origShakeRadius = 30.0f;
 	private float _shakeRadius;
 	private float _randomAngle;
-	private Vector2 _offset;
-	private Vector2 _currentPosition;
-	private Vector2 _origPosition;
+	private final Vector2 _offset;
+	private final Vector2 _currentPosition;
+	private final Vector2 _origPosition;
 
-	
+
 	public ShakeCamera(float x, float y, float shakeRadius){
 		this._origPosition = new Vector2(x,y);
 		this._shakeRadius = shakeRadius;
@@ -27,19 +27,19 @@ public class ShakeCamera {
 	public void setOrigPosition(float x, float y){
 		this._origPosition.set(x,y);
 	}
-	
+
 	public boolean isCameraShaking(){
 		return _isShaking;
 	}
-	
+
 	public void startShaking(){
 		_isShaking = true;
 	}
-	
+
 	private void seedRandomAngle(){
 		_randomAngle = MathUtils.random(1, 360);
 	}
-	
+
 	private void computeCameraOffset(){
 		float sine = MathUtils.sinDeg(_randomAngle);
 		float cosine = MathUtils.cosDeg(_randomAngle);
@@ -52,14 +52,14 @@ public class ShakeCamera {
 
 		//Gdx.app.debug(TAG, "Offset is x:" + _offset.x + " , y: " + _offset.y );
 	}
-	
+
 	private void computeCurrentPosition(){
 		_currentPosition.x = _origPosition.x + _offset.x;
 		_currentPosition.y = _origPosition.y + _offset.y;
 
 		//Gdx.app.debug(TAG, "Current position is x:" + _currentPosition.x + " , y: " + _currentPosition.y );
 	}
-	
+
 	private void diminishShake(){
 		//Gdx.app.debug(TAG, "Current shakeRadius is: " + _shakeRadius + " randomAngle is: " + _randomAngle);
 
@@ -68,7 +68,7 @@ public class ShakeCamera {
 			reset();
 			return;
 		}
-		
+
 		_isShaking = true;
 		_shakeRadius *= .9f;
 		//Gdx.app.debug(TAG, "New shakeRadius is: " + _shakeRadius);
@@ -85,7 +85,7 @@ public class ShakeCamera {
 		_currentPosition.x = _origPosition.x;
 		_currentPosition.y = _origPosition.y;
 	}
-	
+
 	public Vector2 getNewShakePosition(){
 		computeCameraOffset();
 		computeCurrentPosition();

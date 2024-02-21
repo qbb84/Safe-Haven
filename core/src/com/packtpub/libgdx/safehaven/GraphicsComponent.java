@@ -134,7 +134,7 @@ public abstract class GraphicsComponent extends ComponentSubject implements Comp
 			animationKeyFrames[i] = textureFrames[points.get(i).x][points.get(i).y];
         }
 
-        Animation animation = new Animation(frameDuration, (Object[])animationKeyFrames);
+		Animation animation = new Animation(frameDuration, animationKeyFrames);
 		animation.setPlayMode(Animation.PlayMode.LOOP);
 
         return animation;

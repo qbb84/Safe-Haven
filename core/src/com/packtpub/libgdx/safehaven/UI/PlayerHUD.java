@@ -3,9 +3,9 @@ package com.packtpub.libgdx.safehaven.UI;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -14,14 +14,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.packtpub.libgdx.safehaven.Component;
-import com.packtpub.libgdx.safehaven.ComponentObserver;
-import com.packtpub.libgdx.safehaven.Entity;
-import com.packtpub.libgdx.safehaven.EntityConfig;
-import com.packtpub.libgdx.safehaven.InventoryItem;
+import com.packtpub.libgdx.safehaven.*;
 import com.packtpub.libgdx.safehaven.InventoryItem.ItemTypeID;
-import com.packtpub.libgdx.safehaven.MapManager;
-import com.packtpub.libgdx.safehaven.Utility;
 import com.packtpub.libgdx.safehaven.audio.AudioManager;
 import com.packtpub.libgdx.safehaven.audio.AudioObserver;
 import com.packtpub.libgdx.safehaven.audio.AudioSubject;
@@ -40,27 +34,27 @@ import com.packtpub.libgdx.safehaven.sfx.ShakeCamera;
 public class PlayerHUD implements Screen, AudioSubject, ProfileObserver,ComponentObserver,ConversationGraphObserver,StoreInventoryObserver, BattleObserver, InventoryObserver, StatusObserver {
     private static final String TAG = PlayerHUD.class.getSimpleName();
 
-    private Stage _stage;
-    private Viewport _viewport;
-    private Camera _camera;
-    private Entity _player;
+	private final Stage _stage;
+	private final Viewport _viewport;
+	private final Camera _camera;
+	private final Entity _player;
 
-    private StatusUI _statusUI;
-    private InventoryUI _inventoryUI;
-    private ConversationUI _conversationUI;
-    private StoreInventoryUI _storeInventoryUI;
-    private QuestUI _questUI;
-    private BattleUI _battleUI;
+	private final StatusUI _statusUI;
+	private final InventoryUI _inventoryUI;
+	private final ConversationUI _conversationUI;
+	private final StoreInventoryUI _storeInventoryUI;
+	private final QuestUI _questUI;
+	private final BattleUI _battleUI;
 
-    private Dialog _messageBoxUI;
-    private Json _json;
-    private MapManager _mapMgr;
+	private final Dialog _messageBoxUI;
+	private final Json _json;
+	private final MapManager _mapMgr;
 
-    private Array<AudioObserver> _observers;
-    private ScreenTransitionActor _transitionActor;
+	private final Array<AudioObserver> _observers;
+	private final ScreenTransitionActor _transitionActor;
 
-    private ShakeCamera _shakeCam;
-    private ClockActor _clock;
+	private final ShakeCamera _shakeCam;
+	private final ClockActor _clock;
 
     private static final String INVENTORY_FULL = "Your inventory is full!";
 
@@ -182,14 +176,14 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver,Componen
         ImageButton inventoryButton = _statusUI.getInventoryButton();
         inventoryButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                _inventoryUI.setVisible(_inventoryUI.isVisible() ? false : true);
+				_inventoryUI.setVisible(!_inventoryUI.isVisible());
             }
         });
 
         ImageButton questButton = _statusUI.getQuestButton();
         questButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                _questUI.setVisible(_questUI.isVisible() ? false : true);
+				_questUI.setVisible(!_questUI.isVisible());
             }
         });
 

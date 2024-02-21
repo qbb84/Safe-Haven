@@ -7,15 +7,15 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.packtpub.libgdx.safehaven.SafeHaven;
 import com.packtpub.libgdx.safehaven.Utility;
 import com.packtpub.libgdx.safehaven.audio.AudioObserver;
 
 public class GameOverScreen extends GameScreen {
-    private Stage _stage;
-    private SafeHaven _game;
+	private final Stage _stage;
+	private final SafeHaven _game;
     private static final String DEATH_MESSAGE = "You have fought bravely, but alas, you have fallen during your epic struggle.";
     private static final String GAMEOVER = "Game Over";
 

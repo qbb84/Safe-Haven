@@ -2,7 +2,7 @@ package com.packtpub.libgdx.safehaven.UI;
 
 
 public interface StatusObserver {
-    public static enum StatusEvent {
+	enum StatusEvent {
         UPDATED_GP,
         UPDATED_LEVEL,
         UPDATED_HP,

@@ -1,7 +1,7 @@
 package com.packtpub.libgdx.safehaven;
 
 public interface ComponentObserver {
-    public static enum ComponentEvent {
+	enum ComponentEvent {
         LOAD_CONVERSATION,
         SHOW_CONVERSATION,
         HIDE_CONVERSATION,

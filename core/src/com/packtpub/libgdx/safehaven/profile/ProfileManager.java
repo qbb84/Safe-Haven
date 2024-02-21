@@ -13,7 +13,7 @@ import java.util.Hashtable;
 public class ProfileManager extends ProfileSubject {
     private static final String TAG = ProfileManager.class.getSimpleName();
 
-    private Json _json;
+	private final Json _json;
     private static ProfileManager _profileManager;
     private Hashtable<String,FileHandle> _profiles = null;
     private ObjectMap<String, Object> _profileProperties = new ObjectMap<String, Object>();
@@ -71,7 +71,6 @@ public class ProfileManager extends ProfileSubject {
             }
         }else{
             //TODO: try external directory here
-            return;
         }
     }
 

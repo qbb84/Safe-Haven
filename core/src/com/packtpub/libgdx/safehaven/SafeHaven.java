@@ -1,15 +1,8 @@
 package com.packtpub.libgdx.safehaven;
 
 import com.badlogic.gdx.Game;
-
 import com.badlogic.gdx.Screen;
-import com.packtpub.libgdx.safehaven.screens.CreditScreen;
-import com.packtpub.libgdx.safehaven.screens.CutSceneScreen;
-import com.packtpub.libgdx.safehaven.screens.GameOverScreen;
-import com.packtpub.libgdx.safehaven.screens.LoadGameScreen;
-import com.packtpub.libgdx.safehaven.screens.MainGameScreen;
-import com.packtpub.libgdx.safehaven.screens.MainMenuScreen;
-import com.packtpub.libgdx.safehaven.screens.NewGameScreen;
+import com.packtpub.libgdx.safehaven.screens.*;
 
 
 public class SafeHaven extends Game {
@@ -22,7 +15,7 @@ public class SafeHaven extends Game {
 	private static CutSceneScreen _cutSceneScreen;
 	private static CreditScreen _creditScreen;
 
-	public static enum ScreenType{
+	public enum ScreenType {
 		MainMenu,
 		MainGame,
 		LoadGame,

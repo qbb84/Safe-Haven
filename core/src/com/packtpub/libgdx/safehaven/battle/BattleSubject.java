@@ -4,7 +4,7 @@ import com.badlogic.gdx.utils.Array;
 import com.packtpub.libgdx.safehaven.Entity;
 
 public class BattleSubject {
-    private Array<BattleObserver> _observers;
+	private final Array<BattleObserver> _observers;
 
     public BattleSubject(){
         _observers = new Array<BattleObserver>();

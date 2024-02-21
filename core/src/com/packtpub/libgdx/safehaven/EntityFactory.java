@@ -8,17 +8,17 @@ import java.util.Hashtable;
 public class EntityFactory {
     private static final String TAG = EntityFactory.class.getSimpleName();
 
-    private static Json _json = new Json();
+	private static final Json _json = new Json();
     private static EntityFactory _instance = null;
-    private Hashtable<String, EntityConfig> _entities;
+	private final Hashtable<String, EntityConfig> _entities;
 
-    public static enum EntityType{
+	public enum EntityType {
         PLAYER,
         PLAYER_DEMO,
         NPC
     }
 
-    public static enum EntityName{
+	public enum EntityName {
         PLAYER_PUPPET,
         TOWN_GUARD_WALKING,
         TOWN_BLACKSMITH,

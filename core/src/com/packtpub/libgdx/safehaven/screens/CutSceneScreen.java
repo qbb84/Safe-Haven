@@ -14,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.packtpub.libgdx.safehaven.*;
-import com.packtpub.libgdx.safehaven.SafeHaven;
 import com.packtpub.libgdx.safehaven.UI.AnimatedImage;
 import com.packtpub.libgdx.safehaven.audio.AudioObserver;
 import com.packtpub.libgdx.safehaven.battle.MonsterFactory;
@@ -23,29 +22,29 @@ import com.packtpub.libgdx.safehaven.sfx.ScreenTransitionAction;
 import com.packtpub.libgdx.safehaven.sfx.ScreenTransitionActor;
 
 public class CutSceneScreen extends MainGameScreen {
-    private SafeHaven _game;
-    private Stage _stage;
-    private Viewport _viewport;
-    private Stage _UIStage;
-    private Viewport _UIViewport;
+	private final SafeHaven _game;
+	private final Stage _stage;
+	private final Viewport _viewport;
+	private final Stage _UIStage;
+	private final Viewport _UIViewport;
     private Actor _followingActor;
-    private Dialog _messageBoxUI;
-    private Label _label;
+	private final Dialog _messageBoxUI;
+	private final Label _label;
     private boolean _isCameraFixed = true;
-    private ScreenTransitionActor _transitionActor;
+	private final ScreenTransitionActor _transitionActor;
     private Action _introCutSceneAction;
-    private Action _switchScreenAction;
-    private Action _setupScene01;
-    private Action _setupScene02;
-    private Action _setupScene03;
-    private Action _setupScene04;
-    private Action _setupScene05;
+	private final Action _switchScreenAction;
+	private final Action _setupScene01;
+	private final Action _setupScene02;
+	private final Action _setupScene03;
+	private final Action _setupScene04;
+	private final Action _setupScene05;
 
-    private AnimatedImage _animBlackSmith;
-    private AnimatedImage _animInnKeeper;
-    private AnimatedImage _animMage;
-    private AnimatedImage _animFire;
-    private AnimatedImage _animDemon;
+	private final AnimatedImage _animBlackSmith;
+	private final AnimatedImage _animInnKeeper;
+	private final AnimatedImage _animMage;
+	private final AnimatedImage _animFire;
+	private final AnimatedImage _animDemon;
 
     public CutSceneScreen(SafeHaven game) {
         super(game);

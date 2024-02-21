@@ -4,9 +4,9 @@ import java.util.Hashtable;
 
 public class MapFactory {
     //All maps for the game
-    private static Hashtable<MapType,Map> _mapTable = new Hashtable<MapType, Map>();
+	private static final Hashtable<MapType, Map> _mapTable = new Hashtable<MapType, Map>();
 
-    public static enum MapType{
+	public enum MapType {
         TOP_WORLD,
         TOWN,
         CASTLE_OF_DOOM

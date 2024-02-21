@@ -14,13 +14,13 @@ import com.packtpub.libgdx.safehaven.Utility;
 public class InventorySlot extends Stack implements InventorySlotSubject {
 
     //All slots have this default image
-    private Stack _defaultBackground;
+	private final Stack _defaultBackground;
     private Image _customBackgroundDecal;
-    private Label _numItemsLabel;
+	private final Label _numItemsLabel;
     private int _numItemsVal = 0;
     private int _filterItemType;
 
-    private Array<InventorySlotObserver> _observers;
+	private final Array<InventorySlotObserver> _observers;
 
     public InventorySlot(){
         _filterItemType = 0; //filter nothing
@@ -163,19 +163,13 @@ public class InventorySlot extends Stack implements InventorySlotSubject {
     }
 
     private void checkVisibilityOfItemCount(){
-        if( _numItemsVal < 2){
-            _numItemsLabel.setVisible(false);
-        }else{
-            _numItemsLabel.setVisible(true);
-        }
+		_numItemsLabel.setVisible(_numItemsVal >= 2);
     }
 
     public boolean hasItem(){
         if( hasChildren() ){
             SnapshotArray<Actor> items = this.getChildren();
-            if( items.size > 2 ){
-                return true;
-            }
+			return items.size > 2;
         }
         return false;
     }

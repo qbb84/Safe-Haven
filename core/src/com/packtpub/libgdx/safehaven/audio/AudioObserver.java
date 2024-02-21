@@ -1,7 +1,7 @@
 package com.packtpub.libgdx.safehaven.audio;
 
 public interface AudioObserver {
-    public static enum AudioTypeEvent{
+	enum AudioTypeEvent {
         MUSIC_TITLE("audio/10112013.ogg"),
         MUSIC_TOWN("audio/Magic Town_0.mp3"),
         MUSIC_TOPWORLD("audio/n3535n5n335n35nj.ogg"),
@@ -17,7 +17,7 @@ public interface AudioObserver {
         SOUND_COIN_RUSTLE("audio/00954_SFX_MoneyCoinsDumpedInHand_final.wav"),
         NONE("");
 
-        private String _audioFullFilePath;
+		private final String _audioFullFilePath;
 
         AudioTypeEvent(String audioFullFilePath){
             this._audioFullFilePath = audioFullFilePath;
@@ -28,7 +28,7 @@ public interface AudioObserver {
         }
     }
 
-    public static enum AudioCommand {
+	enum AudioCommand {
         MUSIC_LOAD,
         MUSIC_PLAY_ONCE,
         MUSIC_PLAY_LOOP,

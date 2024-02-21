@@ -12,16 +12,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.packtpub.libgdx.safehaven.SafeHaven;
-import com.packtpub.libgdx.safehaven.SafeHaven;
 import com.packtpub.libgdx.safehaven.Utility;
 import com.packtpub.libgdx.safehaven.audio.AudioObserver;
 import com.packtpub.libgdx.safehaven.profile.ProfileManager;
 
 
 public class LoadGameScreen extends GameScreen {
-    private Stage _stage;
-	private SafeHaven _game;
-	private List _listItems;
+	private final Stage _stage;
+	private final SafeHaven _game;
+	private final List _listItems;
 
 	public LoadGameScreen(SafeHaven game){
 		_game = game;

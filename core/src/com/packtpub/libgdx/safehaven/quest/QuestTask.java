@@ -4,7 +4,13 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 public class QuestTask {
 
-    public static enum QuestType{
+    public String getPropertyValue(String key){
+        Object propertyVal = taskProperties.get(key);
+        if (propertyVal == null) return "";
+        return propertyVal.toString();
+    }
+
+    public enum QuestType {
         FETCH,
         KILL,
         DELIVERY,
@@ -12,14 +18,6 @@ public class QuestTask {
         ESCORT,
         RETURN,
         DISCOVER
-    }
-
-    public static enum QuestTaskPropertyType{
-        IS_TASK_COMPLETE,
-        TARGET_TYPE,
-        TARGET_NUM,
-        TARGET_LOCATION,
-        NONE
     }
 
     private ObjectMap<String, Object> taskProperties;
@@ -84,10 +82,12 @@ public class QuestTask {
         taskProperties.put(key, value);
     }
 
-    public String getPropertyValue(String key){
-        Object propertyVal = taskProperties.get(key);
-        if( propertyVal == null ) return new String();
-        return propertyVal.toString();
+    public enum QuestTaskPropertyType {
+        IS_TASK_COMPLETE,
+        TARGET_TYPE,
+        TARGET_NUM,
+        TARGET_LOCATION,
+        NONE
     }
 
     public String toString(){

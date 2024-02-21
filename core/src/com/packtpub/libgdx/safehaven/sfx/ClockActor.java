@@ -7,18 +7,32 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class ClockActor extends Label {
 
-    public static enum TimeOfDay {
-        DAWN,
-        AFTERNOON,
-        DUSK,
-        NIGHT
-    }
+	private static final String PM = "PM";
 
     private float _totalTime = 0;
     private float _rateOfTime = 1;
-    private static String PM = "PM";
-    private static String AM = "AM";
-    private static String FORMAT = "%02d:%02d %s";
+	private static final String AM = "AM";
+	private static final String FORMAT = "%02d:%02d %s";
+
+    @Override
+    public void act(float delta){
+        _totalTime += (delta * _rateOfTime);
+
+        int seconds = getCurrentTimeSeconds();
+        int minutes = getCurrentTimeMinutes();
+        int hours = getCurrentTimeHours();
+
+		_isAfternoon = hours != 24 && (hours / 12) != 0;
+
+        hours = hours % 12;
+
+        if( hours == 0 ){
+            hours = 12;
+        }
+
+        String time = String.format(FORMAT, hours, minutes, _isAfternoon ? PM : AM);
+        this.setText(time);
+    }
     private boolean _isAfternoon = false;
 
     public ClockActor(CharSequence text, Skin skin) {
@@ -81,28 +95,11 @@ public class ClockActor extends Label {
         }
     }
 
-    @Override
-    public void act(float delta){
-        _totalTime += (delta * _rateOfTime);
-
-        int seconds = getCurrentTimeSeconds();
-        int minutes = getCurrentTimeMinutes();
-        int hours = getCurrentTimeHours();
-
-        if( hours == 24 || (hours/12) == 0 ){
-            _isAfternoon = false;
-        }else{
-            _isAfternoon = true;
-        }
-
-        hours = hours % 12;
-
-        if( hours == 0 ){
-            hours = 12;
-        }
-
-        String time = String.format(FORMAT, hours, minutes, _isAfternoon ? PM : AM);
-        this.setText(time);
+	public enum TimeOfDay {
+        DAWN,
+        AFTERNOON,
+        DUSK,
+        NIGHT
     }
 
     public int getCurrentTimeSeconds(){

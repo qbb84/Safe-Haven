@@ -6,46 +6,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class InventoryItem extends Image {
 
-    public enum ItemAttribute{
-        CONSUMABLE(1),
-        EQUIPPABLE(2),
-        STACKABLE(4);
-
-        private int _attribute;
-
-        ItemAttribute(int attribute){
-            this._attribute = attribute;
-        }
-
-        public int getValue(){
-            return _attribute;
-        }
-
+    public boolean isInventoryItemOffensiveWand(){
+		return (itemUseType & ItemUseType.WAND_ONEHAND.getValue()) == ItemUseType.WAND_ONEHAND.getValue() ||
+			(itemUseType & ItemUseType.WAND_TWOHAND.getValue()) == ItemUseType.WAND_TWOHAND.getValue();
     }
 
-    public enum ItemUseType{
-        ITEM_RESTORE_HEALTH(1),
-        ITEM_RESTORE_MP(2),
-        ITEM_DAMAGE(4),
-        WEAPON_ONEHAND(8),
-        WEAPON_TWOHAND(16),
-        WAND_ONEHAND(32),
-        WAND_TWOHAND(64),
-        ARMOR_SHIELD(128),
-        ARMOR_HELMET(256),
-        ARMOR_CHEST(512),
-        ARMOR_FEET(1024),
-        QUEST_ITEM(2048);
-
-        private int _itemUseType;
-
-        ItemUseType(int itemUseType){
-            this._itemUseType = itemUseType;
-        }
-
-        public int getValue(){
-            return _itemUseType;
-        }
+    public boolean isInventoryItemOffensive(){
+		return (itemUseType & ItemUseType.WEAPON_ONEHAND.getValue()) == ItemUseType.WEAPON_ONEHAND.getValue() ||
+			(itemUseType & ItemUseType.WEAPON_TWOHAND.getValue()) == ItemUseType.WEAPON_TWOHAND.getValue() ||
+			(itemUseType & ItemUseType.WAND_ONEHAND.getValue()) == ItemUseType.WAND_ONEHAND.getValue() ||
+			(itemUseType & ItemUseType.WAND_TWOHAND.getValue()) == ItemUseType.WAND_TWOHAND.getValue();
     }
 
     public enum ItemTypeID {
@@ -59,7 +29,6 @@ public class InventoryItem extends Image {
         SCROLL01,SCROLL02,SCROLL03,
         HERB001,BABY001,HORNS001,FUR001,
         NONE
-        ;
     }
 
     private int itemAttributes;
@@ -170,38 +139,53 @@ public class InventoryItem extends Image {
         }
     }
 
-    public boolean isInventoryItemOffensiveWand(){
-        if(     (itemUseType & ItemUseType.WAND_ONEHAND.getValue() ) == ItemUseType.WAND_ONEHAND.getValue() ||
-                (itemUseType & ItemUseType.WAND_TWOHAND.getValue() ) == ItemUseType.WAND_TWOHAND.getValue()
-                ){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-
-    public boolean isInventoryItemOffensive(){
-        if(     (itemUseType & ItemUseType.WEAPON_ONEHAND.getValue() ) == ItemUseType.WEAPON_ONEHAND.getValue() ||
-                (itemUseType & ItemUseType.WEAPON_TWOHAND.getValue() ) == ItemUseType.WEAPON_TWOHAND.getValue() ||
-                (itemUseType & ItemUseType.WAND_ONEHAND.getValue() ) == ItemUseType.WAND_ONEHAND.getValue() ||
-                (itemUseType & ItemUseType.WAND_TWOHAND.getValue() ) == ItemUseType.WAND_TWOHAND.getValue()
-                ){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
     public boolean isInventoryItemDefensive(){
-        if(     (itemUseType & ItemUseType.ARMOR_CHEST.getValue() ) == ItemUseType.ARMOR_CHEST.getValue() ||
-                (itemUseType & ItemUseType.ARMOR_HELMET.getValue() ) == ItemUseType.ARMOR_HELMET.getValue() ||
-                (itemUseType & ItemUseType.ARMOR_FEET.getValue() ) == ItemUseType.ARMOR_FEET.getValue() ||
-                (itemUseType & ItemUseType.ARMOR_SHIELD.getValue() ) == ItemUseType.ARMOR_SHIELD.getValue()
-                ){
-            return true;
-        }else{
-            return false;
+		return (itemUseType & ItemUseType.ARMOR_CHEST.getValue()) == ItemUseType.ARMOR_CHEST.getValue() ||
+			(itemUseType & ItemUseType.ARMOR_HELMET.getValue()) == ItemUseType.ARMOR_HELMET.getValue() ||
+			(itemUseType & ItemUseType.ARMOR_FEET.getValue()) == ItemUseType.ARMOR_FEET.getValue() ||
+			(itemUseType & ItemUseType.ARMOR_SHIELD.getValue()) == ItemUseType.ARMOR_SHIELD.getValue();
+    }
+
+
+    public enum ItemAttribute{
+        CONSUMABLE(1),
+        EQUIPPABLE(2),
+        STACKABLE(4);
+
+		private final int _attribute;
+
+        ItemAttribute(int attribute){
+            this._attribute = attribute;
+        }
+
+        public int getValue(){
+            return _attribute;
+        }
+
+    }
+
+    public enum ItemUseType{
+        ITEM_RESTORE_HEALTH(1),
+        ITEM_RESTORE_MP(2),
+        ITEM_DAMAGE(4),
+        WEAPON_ONEHAND(8),
+        WEAPON_TWOHAND(16),
+        WAND_ONEHAND(32),
+        WAND_TWOHAND(64),
+        ARMOR_SHIELD(128),
+        ARMOR_HELMET(256),
+        ARMOR_CHEST(512),
+        ARMOR_FEET(1024),
+        QUEST_ITEM(2048);
+
+		private final int _itemUseType;
+
+        ItemUseType(int itemUseType){
+            this._itemUseType = itemUseType;
+        }
+
+        public int getValue(){
+            return _itemUseType;
         }
     }
 }

@@ -13,12 +13,11 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 
 public final class Utility {
 	public static final AssetManager _assetManager = new AssetManager();
 	private static final String TAG = Utility.class.getSimpleName();
-	private static InternalFileHandleResolver _filePathResolver =  new InternalFileHandleResolver();
+	private static final InternalFileHandleResolver _filePathResolver = new InternalFileHandleResolver();
 
 	private final static String STATUSUI_TEXTURE_ATLAS_PATH = "skins/statusui.atlas";
 	private final static String STATUSUI_SKIN_PATH = "skins/statusui.json";

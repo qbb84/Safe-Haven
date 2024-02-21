@@ -2,13 +2,12 @@ package com.packtpub.libgdx.safehaven;
 
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.utils.Array;
-
 import com.badlogic.gdx.utils.ObjectMap;
 import com.packtpub.libgdx.safehaven.Entity.AnimationType;
 import com.packtpub.libgdx.safehaven.InventoryItem.ItemTypeID;
 
 public class EntityConfig {
-    private Array<AnimationConfig> animationConfig;
+    private final Array<AnimationConfig> animationConfig;
     private Array<ItemTypeID> inventory;
     private Entity.State state = Entity.State.IDLE;
     private Entity.Direction direction = Entity.Direction.DOWN;
@@ -19,14 +18,10 @@ public class EntityConfig {
     private String itemTypeID;
     private ObjectMap<String, String> entityProperties;
 
-    public static enum EntityProperties{
-        ENTITY_HEALTH_POINTS,
-        ENTITY_ATTACK_POINTS,
-        ENTITY_DEFENSE_POINTS,
-        ENTITY_HIT_DAMAGE_TOTAL,
-        ENTITY_XP_REWARD,
-        ENTITY_GP_REWARD,
-        NONE
+    public String getPropertyValue(String key){
+        Object propertyVal = entityProperties.get(key);
+        if (propertyVal == null) return "";
+        return propertyVal.toString();
     }
 
     EntityConfig(){
@@ -66,10 +61,14 @@ public class EntityConfig {
         entityProperties.put(key, value);
     }
 
-    public String getPropertyValue(String key){
-        Object propertyVal = entityProperties.get(key);
-        if( propertyVal == null ) return new String();
-        return propertyVal.toString();
+    public enum EntityProperties {
+        ENTITY_HEALTH_POINTS,
+        ENTITY_ATTACK_POINTS,
+        ENTITY_DEFENSE_POINTS,
+        ENTITY_HIT_DAMAGE_TOTAL,
+        ENTITY_XP_REWARD,
+        ENTITY_GP_REWARD,
+        NONE
     }
 
     public String getCurrentQuestID() {

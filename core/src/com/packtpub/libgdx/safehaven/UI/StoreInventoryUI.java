@@ -1,59 +1,47 @@
 package com.packtpub.libgdx.safehaven.UI;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
-import com.packtpub.libgdx.safehaven.Utility;
 import com.packtpub.libgdx.safehaven.UI.StoreInventoryObserver.StoreInventoryEvent;
+import com.packtpub.libgdx.safehaven.Utility;
 
 public class StoreInventoryUI extends Window implements InventorySlotObserver, StoreInventorySubject{
 
-    private int _numStoreInventorySlots = 30;
-    private int _lengthSlotRow = 10;
-    private Table _inventorySlotTable;
-    private Table _playerInventorySlotTable;
-    private DragAndDrop _dragAndDrop;
-    private Array<Actor> _inventoryActors;
+	private static final String SELL = "SELL";
+	private static final String BUY = "BUY";
+	private static final String GP = " GP";
+	private static final String PLAYER_TOTAL = "Player Total";
+	private final int _numStoreInventorySlots = 30;
+	private final int _lengthSlotRow = 10;
 
     private final int _slotWidth = 52;
     private final int _slotHeight = 52;
-
-    private InventorySlotTooltip _inventorySlotTooltip;
-
-    private Label _sellTotalLabel;
-    private Label _buyTotalLabel;
-    private Label _playerTotalGP;
+	private final Table _inventorySlotTable;
+	private final Table _playerInventorySlotTable;
+	private final DragAndDrop _dragAndDrop;
+	private final Array<Actor> _inventoryActors;
 
     private int _tradeInVal = 0;
     private int _fullValue = 0;
     private int _playerTotal = 0;
-
-    private Button _sellButton;
-    private Button _buyButton;
+	private final InventorySlotTooltip _inventorySlotTooltip;
+	private final Label _sellTotalLabel;
     public TextButton _closeButton;
-
-    private Table _buttons;
-    private Table _totalLabels;
-
-    private Array<StoreInventoryObserver> _observers;
-
-    private Json _json;
-
-    private static String SELL = "SELL";
-    private static String BUY = "BUY";
-    private static String GP = " GP";
-    private static String PLAYER_TOTAL = "Player Total";
+	private final Label _buyTotalLabel;
+	private final Label _playerTotalGP;
+	private final Button _sellButton;
+	private final Button _buyButton;
+	private final Table _buttons;
+	private final Table _totalLabels;
+	private final Array<StoreInventoryObserver> _observers;
+	private final Json _json;
 
     public StoreInventoryUI(){
         super("Store Inventory", Utility.STATUSUI_SKIN, "solidbackground");
@@ -260,17 +248,9 @@ public class StoreInventoryUI extends Window implements InventorySlotObserver, S
     }
 
     public void checkButtonStates(){
-        if( _tradeInVal <= 0 ) {
-            disableButton(_sellButton, true);
-        }else{
-            disableButton(_sellButton, false);
-        }
+		disableButton(_sellButton, _tradeInVal <= 0);
 
-        if( _fullValue <= 0 || _playerTotal < _fullValue) {
-            disableButton(_buyButton, true);
-        }else{
-            disableButton(_buyButton, false);
-        }
+		disableButton(_buyButton, _fullValue <= 0 || _playerTotal < _fullValue);
     }
 
     public void setPlayerGP(int value){

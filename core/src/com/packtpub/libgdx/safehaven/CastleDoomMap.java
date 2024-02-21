@@ -1,13 +1,12 @@
 package com.packtpub.libgdx.safehaven;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.packtpub.libgdx.safehaven.audio.AudioObserver;
 import com.packtpub.libgdx.safehaven.sfx.ParticleEffectFactory;
 
 public class CastleDoomMap extends Map{
-    private static String _mapPath = "maps/castle_of_doom.tmx";
+	private static final String _mapPath = "maps/castle_of_doom.tmx";
 
     CastleDoomMap(){
         super(MapFactory.MapType.CASTLE_OF_DOOM, _mapPath);

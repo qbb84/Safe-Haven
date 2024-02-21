@@ -3,7 +3,7 @@ package com.packtpub.libgdx.safehaven;
 import com.badlogic.gdx.utils.Array;
 
 public class ComponentSubject {
-    private Array<ComponentObserver> _observers;
+	private final Array<ComponentObserver> _observers;
 
     public ComponentSubject(){
         _observers = new Array<ComponentObserver>();

@@ -1,26 +1,22 @@
 package com.packtpub.libgdx.safehaven.UI;
 
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.packtpub.libgdx.safehaven.Utility;
 import com.packtpub.libgdx.safehaven.battle.LevelTable;
 
 public class StatusUI extends Window implements StatusSubject {
-    private Image _hpBar;
-    private Image _mpBar;
-    private Image _xpBar;
+	private final Image _hpBar;
+	private final Image _mpBar;
+	private final Image _xpBar;
 
-    private ImageButton _inventoryButton;
-    private ImageButton _questButton;
-    private Array<StatusObserver> _observers;
+	private final ImageButton _inventoryButton;
+	private final ImageButton _questButton;
+	private final Array<StatusObserver> _observers;
 
-    private Array<LevelTable> _levelTables;
+	private final Array<LevelTable> _levelTables;
     private static final String LEVEL_TABLE_CONFIG = "scripts/level_tables.json";
 
     //Attributes
@@ -34,11 +30,11 @@ public class StatusUI extends Window implements StatusSubject {
     private int _hpCurrentMax = -1;
     private int _mpCurrentMax = -1;
 
-    private Label _hpValLabel;
-    private Label _mpValLabel;
-    private Label _xpValLabel;
-    private Label _levelValLabel;
-    private Label _goldValLabel;
+	private final Label _hpValLabel;
+	private final Label _mpValLabel;
+	private final Label _xpValLabel;
+	private final Label _levelValLabel;
+	private final Label _goldValLabel;
 
     private float _barWidth = 0;
     private float _barHeight = 0;

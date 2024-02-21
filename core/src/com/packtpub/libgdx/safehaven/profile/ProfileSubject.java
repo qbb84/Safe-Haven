@@ -4,7 +4,7 @@ import com.badlogic.gdx.utils.Array;
 
 public class ProfileSubject {
 
-    private Array<ProfileObserver> _observers;
+	private final Array<ProfileObserver> _observers;
 
     public ProfileSubject(){
         _observers = new Array<ProfileObserver>();

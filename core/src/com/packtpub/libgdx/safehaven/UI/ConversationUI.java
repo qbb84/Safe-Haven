@@ -2,13 +2,9 @@ package com.packtpub.libgdx.safehaven.UI;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
-import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Json;
 import com.packtpub.libgdx.safehaven.EntityConfig;
 import com.packtpub.libgdx.safehaven.Utility;
@@ -21,14 +17,14 @@ import java.util.ArrayList;
 public class ConversationUI extends Window {
     private static final String TAG = ConversationUI.class.getSimpleName();
 
-    private Label _dialogText;
-    private List _listItems;
+	private final Label _dialogText;
+	private final List _listItems;
     private ConversationGraph _graph;
     private String _currentEntityID;
 
-    private TextButton _closeButton;
+	private final TextButton _closeButton;
 
-    private Json _json;
+	private final Json _json;
 
     public ConversationUI() {
         super("dialog", Utility.STATUSUI_SKIN, "solidbackground");

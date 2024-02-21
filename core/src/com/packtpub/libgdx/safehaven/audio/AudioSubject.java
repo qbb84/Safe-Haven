@@ -1,8 +1,11 @@
 package com.packtpub.libgdx.safehaven.audio;
 
 public interface AudioSubject {
-    public void addObserver(AudioObserver audioObserver);
-    public void removeObserver(AudioObserver audioObserver);
-    public void removeAllObservers();
-    public void notify(final AudioObserver.AudioCommand command, AudioObserver.AudioTypeEvent event);
+	void addObserver(AudioObserver audioObserver);
+
+	void removeObserver(AudioObserver audioObserver);
+
+	void removeAllObservers();
+
+	void notify(final AudioObserver.AudioCommand command, AudioObserver.AudioTypeEvent event);
 }

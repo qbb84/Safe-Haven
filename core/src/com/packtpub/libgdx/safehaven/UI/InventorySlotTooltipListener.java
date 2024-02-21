@@ -7,10 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 public class InventorySlotTooltipListener extends InputListener {
 
-    private InventorySlotTooltip _toolTip;
+	private final InventorySlotTooltip _toolTip;
     private boolean _isInside = false;
-    private Vector2 _currentCoords;
-    private Vector2 _offset;
+	private final Vector2 _currentCoords;
+	private final Vector2 _offset;
 
     public InventorySlotTooltipListener(InventorySlotTooltip toolTip){
         this._toolTip = toolTip;

@@ -1,24 +1,16 @@
 package com.packtpub.libgdx.safehaven.UI;
 
 import com.badlogic.gdx.graphics.g2d.NinePatch;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-import com.packtpub.libgdx.safehaven.Component;
-import com.packtpub.libgdx.safehaven.Entity;
-import com.packtpub.libgdx.safehaven.InventoryItem;
-import com.packtpub.libgdx.safehaven.InventoryItemFactory;
-import com.packtpub.libgdx.safehaven.InventoryItem.ItemUseType;
+import com.packtpub.libgdx.safehaven.*;
 import com.packtpub.libgdx.safehaven.InventoryItem.ItemTypeID;
-import com.packtpub.libgdx.safehaven.Utility;
+import com.packtpub.libgdx.safehaven.InventoryItem.ItemUseType;
 
 public class InventoryUI extends Window implements InventorySubject, InventorySlotObserver{
 
@@ -26,24 +18,24 @@ public class InventoryUI extends Window implements InventorySubject, InventorySl
     public static final String PLAYER_INVENTORY = "Player_Inventory";
     public static final String STORE_INVENTORY = "Store_Inventory";
 
-    private int _lengthSlotRow = 10;
-    private Table _inventorySlotTable;
-    private Table _playerSlotsTable;
-    private Table _equipSlots;
-    private DragAndDrop _dragAndDrop;
-    private Array<Actor> _inventoryActors;
+	private final int _lengthSlotRow = 10;
+	private final Table _inventorySlotTable;
+	private final Table _playerSlotsTable;
+	private final Table _equipSlots;
+	private final DragAndDrop _dragAndDrop;
+	private final Array<Actor> _inventoryActors;
 
-    private Label _DPValLabel;
+	private final Label _DPValLabel;
     private int _DPVal = 0;
-    private Label _APValLabel;
+	private final Label _APValLabel;
     private int _APVal = 0;
 
     private final int _slotWidth = 52;
     private final int _slotHeight = 52;
 
-    private Array<InventoryObserver> _observers;
+	private final Array<InventoryObserver> _observers;
 
-    private InventorySlotTooltip _inventorySlotTooltip;
+	private final InventorySlotTooltip _inventorySlotTooltip;
 
     public InventoryUI(){
         super("Inventory", Utility.STATUSUI_SKIN, "solidbackground");
@@ -251,7 +243,7 @@ public class InventoryUI extends Window implements InventorySubject, InventorySl
                 inventorySlot.add(item);
                 if( item.getName().equalsIgnoreCase(defaultName) ){
                     draganddrop.addSource(new InventorySlotSource(inventorySlot, draganddrop));
-                }else if( disableNonDefaultItems == false ){
+				} else if (!disableNonDefaultItems) {
                     draganddrop.addSource(new InventorySlotSource(inventorySlot, draganddrop));
                 }
             }

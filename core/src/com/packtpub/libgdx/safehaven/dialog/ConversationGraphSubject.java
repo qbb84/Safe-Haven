@@ -3,7 +3,7 @@ package com.packtpub.libgdx.safehaven.dialog;
 import com.badlogic.gdx.utils.Array;
 
 public class ConversationGraphSubject {
-    private Array<ConversationGraphObserver> _observers;
+	private final Array<ConversationGraphObserver> _observers;
 
     public ConversationGraphSubject(){
         _observers = new Array<ConversationGraphObserver>();

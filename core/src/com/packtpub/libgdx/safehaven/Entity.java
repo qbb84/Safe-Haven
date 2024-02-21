@@ -3,13 +3,13 @@ package com.packtpub.libgdx.safehaven;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.packtpub.libgdx.safehaven.profile.ProfileManager;
 
@@ -19,7 +19,7 @@ import java.util.Hashtable;
 public class Entity {
 	private static final String TAG = Entity.class.getSimpleName();
 
-	public static enum Direction {
+	public enum Direction {
 		UP,
 		RIGHT,
 		DOWN,
@@ -42,7 +42,7 @@ public class Entity {
 		}
 	}
 
-	public static enum State {
+	public enum State {
 		IDLE,
 		WALKING,
 
@@ -54,7 +54,7 @@ public class Entity {
 		}
 	}
 
-	public static enum AnimationType {
+	public enum AnimationType {
 		WALK_LEFT,
 		WALK_RIGHT,
 		WALK_UP,

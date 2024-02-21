@@ -8,9 +8,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapImageLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.Json;
-
 import com.packtpub.libgdx.safehaven.*;
-import com.packtpub.libgdx.safehaven.SafeHaven;
 import com.packtpub.libgdx.safehaven.UI.PlayerHUD;
 import com.packtpub.libgdx.safehaven.audio.AudioManager;
 import com.packtpub.libgdx.safehaven.profile.ProfileManager;
@@ -28,26 +26,24 @@ public class MainGameScreen extends GameScreen {
 		public static float aspectRatio;
 	}
 
-	public static enum GameState {
-		SAVING,
-		LOADING,
-		RUNNING,
-		PAUSED,
-		GAME_OVER
-	}
+	private final Json _json;
 	private static GameState _gameState;
 
 	protected OrthogonalTiledMapRenderer _mapRenderer = null;
 	protected MapManager _mapMgr;
 	protected OrthographicCamera _camera = null;
 	protected OrthographicCamera _hudCamera = null;
-
-	private Json _json;
-	private SafeHaven _game;
-	private InputMultiplexer _multiplexer;
-
-	private Entity _player;
-	private PlayerHUD _playerHUD;
+	private final SafeHaven _game;
+	private final InputMultiplexer _multiplexer;
+	private final Entity _player;
+	private final PlayerHUD _playerHUD;
+	public enum GameState {
+		SAVING,
+		LOADING,
+		RUNNING,
+		PAUSED,
+		GAME_OVER
+	}
 
 	public MainGameScreen(SafeHaven game){
 		_game = game;

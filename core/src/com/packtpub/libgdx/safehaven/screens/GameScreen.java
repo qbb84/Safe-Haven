@@ -7,7 +7,7 @@ import com.packtpub.libgdx.safehaven.audio.AudioObserver;
 import com.packtpub.libgdx.safehaven.audio.AudioSubject;
 
 public class GameScreen implements Screen, AudioSubject{
-    private Array<AudioObserver> _observers;
+	private final Array<AudioObserver> _observers;
 
     public GameScreen(){
         _observers = new Array<AudioObserver>();

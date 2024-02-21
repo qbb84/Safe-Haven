@@ -1,13 +1,12 @@
 package com.packtpub.libgdx.safehaven;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.packtpub.libgdx.safehaven.audio.AudioObserver;
 import com.packtpub.libgdx.safehaven.sfx.ParticleEffectFactory;
 
 public class TopWorldMap extends Map{
-    private static String _mapPath = "maps/topworld.tmx";
+	private static final String _mapPath = "maps/topworld.tmx";
 
     TopWorldMap(){
         super(MapFactory.MapType.TOP_WORLD, _mapPath);

@@ -61,11 +61,7 @@ public class NPCPhysicsComponent extends PhysicsComponent {
         _selectionRay.set(mapMgr.getPlayer().getCurrentBoundingBox().x, mapMgr.getPlayer().getCurrentBoundingBox().y, 0.0f, _boundingBox.x, _boundingBox.y, 0.0f);
         float distance =  _selectionRay.origin.dst(_selectionRay.direction);
 
-        if( distance <= _selectRayMaximumDistance ){
-            return false;
-        }else{
-            return true;
-        }
+		return !(distance <= _selectRayMaximumDistance);
     }
 
     @Override
@@ -75,10 +71,6 @@ public class NPCPhysicsComponent extends PhysicsComponent {
             return true;
         }
 
-        if( super.isCollisionWithMapEntities(entity, mapMgr) ){
-            return true;
-        }
-
-        return false;
+		return super.isCollisionWithMapEntities(entity, mapMgr);
     }
 }

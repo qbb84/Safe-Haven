@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 
 public class ScreenTransitionAction extends Action {
-    public static enum ScreenTransitionType{
+	public enum ScreenTransitionType {
         FADE_IN,
         FADE_OUT,
         NONE

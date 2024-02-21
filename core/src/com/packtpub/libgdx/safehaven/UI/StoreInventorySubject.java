@@ -2,8 +2,11 @@ package com.packtpub.libgdx.safehaven.UI;
 
 
 public interface StoreInventorySubject {
-    public void addObserver(StoreInventoryObserver storeObserver);
-    public void removeObserver(StoreInventoryObserver storeObserver);
-    public void removeAllObservers();
-    public void notify(String value, StoreInventoryObserver.StoreInventoryEvent event);
+	void addObserver(StoreInventoryObserver storeObserver);
+
+	void removeObserver(StoreInventoryObserver storeObserver);
+
+	void removeAllObservers();
+
+	void notify(String value, StoreInventoryObserver.StoreInventoryEvent event);
 }

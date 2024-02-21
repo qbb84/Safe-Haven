@@ -8,16 +8,15 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.Scaling;
 import com.packtpub.libgdx.safehaven.InventoryItem.ItemTypeID;
 
-
 import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class InventoryItemFactory {
 
-    private Json _json = new Json();
+	private final Json _json = new Json();
     private final String INVENTORY_ITEM = "scripts/inventory_items.json";
     private static InventoryItemFactory _instance = null;
-    private Hashtable<ItemTypeID,InventoryItem> _inventoryItemList;
+	private final Hashtable<ItemTypeID, InventoryItem> _inventoryItemList;
 
     public static InventoryItemFactory getInstance() {
         if (_instance == null) {

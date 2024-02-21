@@ -1,7 +1,7 @@
 package com.packtpub.libgdx.safehaven.UI;
 
 public interface InventorySlotObserver {
-    public static enum SlotEvent{
+	enum SlotEvent {
         ADDED_ITEM,
         REMOVED_ITEM
     }

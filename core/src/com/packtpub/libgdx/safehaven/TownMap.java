@@ -1,7 +1,5 @@
 package com.packtpub.libgdx.safehaven;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
@@ -12,8 +10,8 @@ import com.packtpub.libgdx.safehaven.sfx.ParticleEffectFactory;
 public class TownMap extends Map{
     private static final String TAG = PlayerPhysicsComponent.class.getSimpleName();
 
-    private static String _mapPath = "maps/town.tmx";
-    private Json _json;
+	private static final String _mapPath = "maps/town.tmx";
+	private final Json _json;
 
     TownMap(){
         super(MapFactory.MapType.TOWN, _mapPath);

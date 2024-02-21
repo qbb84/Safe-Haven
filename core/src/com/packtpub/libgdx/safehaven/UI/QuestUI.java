@@ -6,8 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.packtpub.libgdx.safehaven.MapManager;
@@ -24,12 +24,12 @@ public class QuestUI extends Window {
     public static final String RETURN_QUEST = "conversations/return_quest.json";
     public static final String FINISHED_QUEST = "conversations/quest_finished.json";
 
-    private List _listQuests;
-    private List _listTasks;
-    private Json _json;
+	private final List _listQuests;
+	private final List _listTasks;
+	private final Json _json;
     private Array<QuestGraph> _quests;
-    private Label _questLabel;
-    private Label _tasksLabel;
+	private final Label _questLabel;
+	private final Label _tasksLabel;
 
     public QuestUI() {
         super("Quest Log", Utility.STATUSUI_SKIN, "solidbackground");

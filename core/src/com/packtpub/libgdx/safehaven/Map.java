@@ -1,7 +1,6 @@
 package com.packtpub.libgdx.safehaven;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.maps.MapLayer;
@@ -24,7 +23,7 @@ public abstract class Map implements AudioSubject{
 
     public final static float UNIT_SCALE  = 1/16f;
 
-    private Array<AudioObserver> _observers;
+	private final Array<AudioObserver> _observers;
 
     //Map layers
     protected final static String COLLISION_LAYER = "MAP_COLLISION_LAYER";

@@ -4,25 +4,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.packtpub.libgdx.safehaven.SafeHaven;
 import com.packtpub.libgdx.safehaven.SafeHaven.ScreenType;
-import com.packtpub.libgdx.safehaven.SafeHaven;
-import com.packtpub.libgdx.safehaven.SafeHaven;
 import com.packtpub.libgdx.safehaven.Utility;
 import com.packtpub.libgdx.safehaven.audio.AudioObserver;
 import com.packtpub.libgdx.safehaven.profile.ProfileManager;
 
 public class NewGameScreen extends GameScreen {
 
-	private Stage _stage;
-	private SafeHaven _game;
-	private TextField _profileText;
-	private Dialog _overwriteDialog;
+	private final Stage _stage;
+	private final SafeHaven _game;
+	private final TextField _profileText;
+	private final Dialog _overwriteDialog;
 
 	public NewGameScreen(SafeHaven game){
 		_game = game;

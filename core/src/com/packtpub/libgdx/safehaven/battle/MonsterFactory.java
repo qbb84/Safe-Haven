@@ -8,7 +8,11 @@ import com.packtpub.libgdx.safehaven.EntityConfig;
 import java.util.Hashtable;
 
 public class MonsterFactory {
-    public static enum MonsterEntityType{
+	private final Hashtable<String, Entity> _entities;
+
+    private static MonsterFactory _instance = null;
+	private final Hashtable<String, Array<MonsterEntityType>> _monsterZones;
+	public enum MonsterEntityType {
         MONSTER001,MONSTER002,MONSTER003,MONSTER004,MONSTER005,
         MONSTER006,MONSTER007,MONSTER008,MONSTER009,MONSTER010,
         MONSTER011,MONSTER012,MONSTER013,MONSTER014,MONSTER015,
@@ -20,10 +24,6 @@ public class MonsterFactory {
         MONSTER041, MONSTER042,
         NONE
     }
-
-    private static MonsterFactory _instance = null;
-    private Hashtable<String, Entity> _entities;
-    private Hashtable<String, Array<MonsterEntityType>> _monsterZones;
 
     private MonsterFactory(){
         Array<EntityConfig> configs = Entity.getEntityConfigs("scripts/monsters.json");

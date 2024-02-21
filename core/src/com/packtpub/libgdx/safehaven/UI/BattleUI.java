@@ -10,8 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.packtpub.libgdx.safehaven.Entity;
 import com.packtpub.libgdx.safehaven.EntityConfig;
@@ -24,7 +24,7 @@ import com.packtpub.libgdx.safehaven.sfx.ShakeCamera;
 public class BattleUI extends Window implements BattleObserver {
     private static final String TAG = BattleUI.class.getSimpleName();
 
-    private AnimatedImage _image;
+	private final AnimatedImage _image;
 
     private final int _enemyWidth = 96;
     private final int _enemyHeight = 96;
@@ -38,10 +38,10 @@ public class BattleUI extends Window implements BattleObserver {
     private final float _checkTimer = 1;
 
     private ShakeCamera _battleShakeCam = null;
-    private Array<ParticleEffect> _effects;
+	private final Array<ParticleEffect> _effects;
 
     private float _origDamageValLabelY = 0;
-    private Vector2 _currentImagePosition;
+	private final Vector2 _currentImagePosition;
 
     public BattleUI(){
         super("BATTLE", Utility.STATUSUI_SKIN, "solidbackground");

@@ -3,13 +3,13 @@ package com.packtpub.libgdx.safehaven.UI;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 
 public class InventorySlotSource extends Source {
 
-    private DragAndDrop _dragAndDrop;
+	private final DragAndDrop _dragAndDrop;
     private InventorySlot _sourceSlot;
 
     public InventorySlotSource(InventorySlot sourceSlot, DragAndDrop dragAndDrop) {

@@ -31,12 +31,12 @@ public abstract class InputComponent extends ComponentSubject implements Compone
         keys.put(Keys.DOWN, false);
         keys.put(Keys.QUIT, false);
         keys.put(Keys.PAUSE, false);
-    };
+	}
 
     static {
         mouseButtons.put(Mouse.SELECT, false);
         mouseButtons.put(Mouse.DOACTION, false);
-    };
+	}
 
     InputComponent(){
         _json = new Json();

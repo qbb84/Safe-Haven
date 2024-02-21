@@ -8,17 +8,16 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.packtpub.libgdx.safehaven.SafeHaven;
+import com.badlogic.gdx.utils.Align;
 import com.packtpub.libgdx.safehaven.SafeHaven;
 import com.packtpub.libgdx.safehaven.Utility;
 
 public class CreditScreen extends GameScreen {
-    private static String CREDITS_PATH = "licenses/credits.txt";
-    private Stage _stage;
+	private static final String CREDITS_PATH = "licenses/credits.txt";
+	private final Stage _stage;
     private ScrollPane _scrollPane;
-    private SafeHaven _game;
+	private final SafeHaven _game;
 
     public CreditScreen(SafeHaven game){
         _game = game;

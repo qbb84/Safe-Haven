@@ -6,16 +6,16 @@ import com.badlogic.gdx.math.Vector2;
 
 public class ParticleEffectFactory {
 
-    private static String SFX_ROOT_DIR = "sfx";
+	private static final String SFX_ROOT_DIR = "sfx";
 
-    public static enum ParticleEffectType{
+	public enum ParticleEffectType {
         CANDLE_FIRE("sfx/candle.p"),
         LANTERN_FIRE("sfx/candle.p"),
         LAVA_SMOKE("sfx/smoke.p"),
         WAND_ATTACK("sfx/magic_attack.p"),
         NONE("");
 
-        private String _fullFilePath;
+		private final String _fullFilePath;
 
         ParticleEffectType(String fullFilePath){
             this._fullFilePath = fullFilePath;

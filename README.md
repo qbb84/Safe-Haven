@@ -1,9 +1,5 @@
 # Safe Haven - A LibGDX Tile-Based Game
 
-<p align="center">
-  <img src="rm-images/SafeHaven.png" alt="Safe Haven Logo" width="70%" max-width="400px" height="300px">
-</p> 
-
 ## Project Overview
 
 Safe Haven is built using the power of LibGDX, following the principles outlined in the book Mastering LibGDX The game features an entity component system design pattern, intricate inventory systems, HUD layouts for UI, serialization for saving/loading progress, dynamic dialog trees, captivating quests, and even dramatic instances. The inclusion of shop and store UIs adds depth to the in-game experience, while screen transitions seamlessly guide players through different aspects of the game.

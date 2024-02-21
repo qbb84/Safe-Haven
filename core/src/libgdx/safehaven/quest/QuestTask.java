@@ -4,96 +4,94 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 public class QuestTask {
 
-    public String getPropertyValue(String key){
-        Object propertyVal = taskProperties.get(key);
-        if (propertyVal == null) return "";
-        return propertyVal.toString();
-    }
+	private ObjectMap<String, Object> taskProperties;
+	private String id;
+	private String taskPhrase;
+	private QuestType questType;
+	public QuestTask() {
+		taskProperties = new ObjectMap<String, Object>();
+	}
 
-    public enum QuestType {
-        FETCH,
-        KILL,
-        DELIVERY,
-        GUARD,
-        ESCORT,
-        RETURN,
-        DISCOVER
-    }
+	public String getPropertyValue(String key) {
+		Object propertyVal = taskProperties.get(key);
+		if (propertyVal == null) return "";
+		return propertyVal.toString();
+	}
 
-    private ObjectMap<String, Object> taskProperties;
-    private String id;
-    private String taskPhrase;
-    private QuestType questType;
+	public String getId() {
+		return id;
+	}
 
-    public QuestTask(){
-        taskProperties = new ObjectMap<String, Object>();
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public String getTaskPhrase() {
+		return taskPhrase;
+	}
 
-    public void setId(String id){
-        this.id = id;
-    }
+	public void setTaskPhrase(String taskPhrase) {
+		this.taskPhrase = taskPhrase;
+	}
 
-    public String getTaskPhrase() {
-        return taskPhrase;
-    }
+	public QuestType getQuestType() {
+		return questType;
+	}
 
-    public void setTaskPhrase(String taskPhrase) {
-        this.taskPhrase = taskPhrase;
-    }
+	public void setQuestType(QuestType questType) {
+		this.questType = questType;
+	}
 
-    public QuestType getQuestType() {
-        return questType;
-    }
+	public ObjectMap<String, Object> getTaskProperties() {
+		return taskProperties;
+	}
 
-    public void setQuestType(QuestType questType) {
-        this.questType = questType;
-    }
+	public void setTaskProperties(ObjectMap<String, Object> taskProperties) {
+		this.taskProperties = taskProperties;
+	}
 
-    public ObjectMap<String, Object> getTaskProperties() {
-        return taskProperties;
-    }
+	public boolean isTaskComplete() {
+		if (!taskProperties.containsKey(QuestTaskPropertyType.IS_TASK_COMPLETE.toString())) {
+			setPropertyValue(QuestTaskPropertyType.IS_TASK_COMPLETE.toString(), "false");
+			return false;
+		}
+		String val = taskProperties.get(QuestTaskPropertyType.IS_TASK_COMPLETE.toString()).toString();
+		return Boolean.parseBoolean(val);
+	}
 
-    public void setTaskProperties(ObjectMap<String, Object> taskProperties) {
-        this.taskProperties = taskProperties;
-    }
+	public void setPropertyValue(String key, String value) {
+		taskProperties.put(key, value);
+	}
 
-    public boolean isTaskComplete(){
-        if( !taskProperties.containsKey(QuestTaskPropertyType.IS_TASK_COMPLETE.toString()) ){
-            setPropertyValue(QuestTaskPropertyType.IS_TASK_COMPLETE.toString(), "false");
-            return false;
-        }
-        String val = taskProperties.get(QuestTaskPropertyType.IS_TASK_COMPLETE.toString()).toString();
-        return Boolean.parseBoolean(val);
-    }
+	public void setTaskComplete() {
+		setPropertyValue(QuestTaskPropertyType.IS_TASK_COMPLETE.toString(), "true");
+	}
 
-    public void setTaskComplete(){
-        setPropertyValue(QuestTaskPropertyType.IS_TASK_COMPLETE.toString(), "true");
-    }
+	public void resetAllProperties() {
+		taskProperties.put(QuestTaskPropertyType.IS_TASK_COMPLETE.toString(), "false");
+	}
 
-    public void resetAllProperties(){
-        taskProperties.put(QuestTaskPropertyType.IS_TASK_COMPLETE.toString(), "false");
-    }
+	public String toString() {
+		return taskPhrase;
+	}
 
-    public void setPropertyValue(String key, String value){
-        taskProperties.put(key, value);
-    }
+	public enum QuestType {
+		FETCH,
+		KILL,
+		DELIVERY,
+		GUARD,
+		ESCORT,
+		RETURN,
+		DISCOVER
+	}
 
-    public enum QuestTaskPropertyType {
-        IS_TASK_COMPLETE,
-        TARGET_TYPE,
-        TARGET_NUM,
-        TARGET_LOCATION,
-        NONE
-    }
-
-    public String toString(){
-        return taskPhrase;
-    }
-
+	public enum QuestTaskPropertyType {
+		IS_TASK_COMPLETE,
+		TARGET_TYPE,
+		TARGET_NUM,
+		TARGET_LOCATION,
+		NONE
+	}
 
 
 }

@@ -8,116 +8,115 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 public class ClockActor extends Label {
 
 	private static final String PM = "PM";
-
-    private float _totalTime = 0;
-    private float _rateOfTime = 1;
 	private static final String AM = "AM";
 	private static final String FORMAT = "%02d:%02d %s";
+	private float _totalTime = 0;
+	private float _rateOfTime = 1;
+	private boolean _isAfternoon = false;
 
-    @Override
-    public void act(float delta){
-        _totalTime += (delta * _rateOfTime);
+	public ClockActor(CharSequence text, Skin skin) {
+		super(text, skin);
+		init();
+	}
 
-        int seconds = getCurrentTimeSeconds();
-        int minutes = getCurrentTimeMinutes();
-        int hours = getCurrentTimeHours();
+	private void init() {
+		String time = String.format(FORMAT, 0, 0, _isAfternoon ? PM : AM);
+		this.setText(time);
+		this.pack();
+	}
+
+	public ClockActor(CharSequence text, Skin skin, String styleName) {
+		super(text, skin, styleName);
+		init();
+	}
+
+	public ClockActor(CharSequence text, Skin skin, String fontName, Color color) {
+		super(text, skin, fontName, color);
+		init();
+	}
+
+	public ClockActor(CharSequence text, Skin skin, String fontName, String colorName) {
+		super(text, skin, fontName, colorName);
+		init();
+	}
+
+	public ClockActor(CharSequence text, LabelStyle style) {
+		super(text, style);
+		init();
+	}
+
+	@Override
+	public void act(float delta) {
+		_totalTime += (delta * _rateOfTime);
+
+		int seconds = getCurrentTimeSeconds();
+		int minutes = getCurrentTimeMinutes();
+		int hours = getCurrentTimeHours();
 
 		_isAfternoon = hours != 24 && (hours / 12) != 0;
 
-        hours = hours % 12;
+		hours = hours % 12;
 
-        if( hours == 0 ){
-            hours = 12;
-        }
+		if (hours == 0) {
+			hours = 12;
+		}
 
-        String time = String.format(FORMAT, hours, minutes, _isAfternoon ? PM : AM);
-        this.setText(time);
-    }
-    private boolean _isAfternoon = false;
+		String time = String.format(FORMAT, hours, minutes, _isAfternoon ? PM : AM);
+		this.setText(time);
+	}
 
-    public ClockActor(CharSequence text, Skin skin) {
-        super(text, skin);
-        init();
-    }
+	public int getCurrentTimeSeconds() {
+		return MathUtils.floor(_totalTime % 60);
+	}
 
-    public ClockActor(CharSequence text, Skin skin, String styleName) {
-        super(text, skin, styleName);
-        init();
-    }
+	public int getCurrentTimeMinutes() {
+		return MathUtils.floor((_totalTime / 60) % 60);
+	}
 
-    public ClockActor(CharSequence text, Skin skin, String fontName, Color color) {
-        super(text, skin, fontName, color);
-        init();
-    }
+	public int getCurrentTimeHours() {
+		int hours = MathUtils.floor((_totalTime / 3600) % 24);
 
-    public ClockActor(CharSequence text, Skin skin, String fontName, String colorName) {
-        super(text, skin, fontName, colorName);
-        init();
-    }
+		if (hours == 0) {
+			hours = 24;
+		}
 
-    public ClockActor(CharSequence text, LabelStyle style) {
-        super(text, style);
-        init();
-    }
+		return hours;
+	}
 
-    private void init(){
-        String time = String.format(FORMAT, 0, 0, _isAfternoon?PM:AM);
-        this.setText(time);
-        this.pack();
-    }
+	public float getTotalTime() {
+		return _totalTime;
+	}
 
-    public float getTotalTime() {
-        return _totalTime;
-    }
+	public void setTotalTime(float totalTime) {
+		this._totalTime = totalTime;
+	}
 
-    public void setTotalTime(float totalTime) {
-        this._totalTime = totalTime;
-    }
+	public float getRateOfTime() {
+		return _rateOfTime;
+	}
 
-    public float getRateOfTime() {
-        return _rateOfTime;
-    }
+	public void setRateOfTime(float rateOfTime) {
+		this._rateOfTime = rateOfTime;
+	}
 
-    public void setRateOfTime(float rateOfTime) {
-        this._rateOfTime = rateOfTime;
-    }
-
-    public TimeOfDay getCurrentTimeOfDay(){
-        int hours = getCurrentTimeHours();
-        if( hours >= 7 && hours <= 9 ){
-            return TimeOfDay.DAWN;
-        }else if( hours >= 10 && hours <=16 ){
-            return TimeOfDay.AFTERNOON;
-        }else if( hours >= 17 && hours <= 19 ){
-            return TimeOfDay.DUSK;
-        }else{
-            return TimeOfDay.NIGHT;
-        }
-    }
+	public TimeOfDay getCurrentTimeOfDay() {
+		int hours = getCurrentTimeHours();
+		if (hours >= 7 && hours <= 9) {
+			return TimeOfDay.DAWN;
+		} else if (hours >= 10 && hours <= 16) {
+			return TimeOfDay.AFTERNOON;
+		} else if (hours >= 17 && hours <= 19) {
+			return TimeOfDay.DUSK;
+		} else {
+			return TimeOfDay.NIGHT;
+		}
+	}
 
 	public enum TimeOfDay {
-        DAWN,
-        AFTERNOON,
-        DUSK,
-        NIGHT
-    }
-
-    public int getCurrentTimeSeconds(){
-        return MathUtils.floor(_totalTime % 60);
-    }
-
-    public int getCurrentTimeMinutes(){
-        return MathUtils.floor((_totalTime / 60) % 60);
-    }
-
-    public int getCurrentTimeHours(){
-        int hours = MathUtils.floor((_totalTime / 3600) % 24);
-
-        if( hours == 0 ){
-            hours = 24;
-        }
-
-        return hours;
-    }
+		DAWN,
+		AFTERNOON,
+		DUSK,
+		NIGHT
+	}
 
 }

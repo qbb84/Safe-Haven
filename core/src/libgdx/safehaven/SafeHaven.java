@@ -15,18 +15,8 @@ public class SafeHaven extends Game {
 	private static CutSceneScreen _cutSceneScreen;
 	private static CreditScreen _creditScreen;
 
-	public enum ScreenType {
-		MainMenu,
-		MainGame,
-		LoadGame,
-		NewGame,
-		GameOver,
-		WatchIntro,
-		Credits
-	}
-
-	public Screen getScreenType(ScreenType screenType){
-		switch(screenType){
+	public Screen getScreenType(ScreenType screenType) {
+		switch (screenType) {
 			case MainMenu:
 				return _mainMenuScreen;
 			case MainGame:
@@ -48,7 +38,7 @@ public class SafeHaven extends Game {
 	}
 
 	@Override
-	public void create(){
+	public void create() {
 		_mainGameScreen = new MainGameScreen(this);
 		_mainMenuScreen = new MainMenuScreen(this);
 		_loadGameScreen = new LoadGameScreen(this);
@@ -60,13 +50,23 @@ public class SafeHaven extends Game {
 	}
 
 	@Override
-	public void dispose(){
+	public void dispose() {
 		_mainGameScreen.dispose();
 		_mainMenuScreen.dispose();
 		_loadGameScreen.dispose();
 		_newGameScreen.dispose();
 		_gameOverScreen.dispose();
 		_creditScreen.dispose();
+	}
+
+	public enum ScreenType {
+		MainMenu,
+		MainGame,
+		LoadGame,
+		NewGame,
+		GameOver,
+		WatchIntro,
+		Credits
 	}
 
 }

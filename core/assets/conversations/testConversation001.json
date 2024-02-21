@@ -15,44 +15,44 @@
 		"500": {
 			"id": 500,
 			"dialog": "Do you want to play a game?"
-        }
+		}
 	},
 	"associatedChoices": {
 		"601": [
-                {
-					"class": "com.packtpub.libgdx.safehaven.dialog.ConversationChoice",
-					"sourceId": 601,
-					"destinationId": 500,
-					"choicePhrase": "Go to beginning!",
-					"conversationCommandEvent": "NONE"
-                }
+			{
+				"class": "libgdx.safehaven.dialog.ConversationChoice",
+				"sourceId": 601,
+				"destinationId": 500,
+				"choicePhrase": "Go to beginning!",
+				"conversationCommandEvent": "NONE"
+			}
 		],
 		"250": [],
 		"500": [
-                {
-					"class": "com.packtpub.libgdx.safehaven.dialog.ConversationChoice",
-					"sourceId": 500,
-					"destinationId": 601,
-					"choicePhrase": "YES"
-					"conversationCommandEvent": "NONE"
-                }
-                {
-					"class": "com.packtpub.libgdx.safehaven.dialog.ConversationChoice",
-					"sourceId": 500,
-					"destinationId": 802,
-					"choicePhrase": "NO",
-					"conversationCommandEvent": "NONE"
-                }
-        ]
+			{
+				"class": "libgdx.safehaven.dialog.ConversationChoice",
+				"sourceId": 500,
+				"destinationId": 601,
+				"choicePhrase": "YES",
+				"conversationCommandEvent": "NONE"
+			},
+			{
+				"class": "libgdx.safehaven.dialog.ConversationChoice",
+				"sourceId": 500,
+				"destinationId": 802,
+				"choicePhrase": "NO",
+				"conversationCommandEvent": "NONE"
+			}
+		],
 		"802": [
-                {
-					"class": "com.packtpub.libgdx.safehaven.dialog.ConversationChoice",
-					"sourceId": 802,
-					"destinationId": 500,
-					"choicePhrase": "Go to beginning!",
-					"conversationCommandEvent": "NONE"
-                }
-        ]
-}
+			{
+				"class": "libgdx.safehaven.dialog.ConversationChoice",
+				"sourceId": 802,
+				"destinationId": 500,
+				"choicePhrase": "Go to beginning!",
+				"conversationCommandEvent": "NONE"
+			}
+		]
+	},
 	"currentConversationID": 500
 }

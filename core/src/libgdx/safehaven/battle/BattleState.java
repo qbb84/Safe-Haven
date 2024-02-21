@@ -9,205 +9,211 @@ import libgdx.safehaven.UI.InventoryObserver;
 import libgdx.safehaven.profile.ProfileManager;
 
 public class BattleState extends BattleSubject implements InventoryObserver {
-    private static final String TAG = BattleState.class.getSimpleName();
-
-    private Entity _currentOpponent;
-    private int _currentZoneLevel = 0;
-    private int _currentPlayerAP;
-    private int _currentPlayerDP;
-    private int _currentPlayerWandAPPoints = 0;
-    private final int _chanceOfAttack = 25;
-    private final int _chanceOfEscape = 40;
-    private final int _criticalChance = 90;
+	private static final String TAG = BattleState.class.getSimpleName();
+	private final int _chanceOfAttack = 25;
+	private final int _chanceOfEscape = 40;
+	private final int _criticalChance = 90;
 	private final Timer.Task _playerAttackCalculations;
 	private final Timer.Task _opponentAttackCalculations;
 	private final Timer.Task _checkPlayerMagicUse;
+	private Entity _currentOpponent;
+	private int _currentZoneLevel = 0;
+	private int _currentPlayerAP;
+	private int _currentPlayerDP;
+	private int _currentPlayerWandAPPoints = 0;
 
-    public BattleState(){
-        _playerAttackCalculations = getPlayerAttackCalculationTimer();
-        _opponentAttackCalculations = getOpponentAttackCalculationTimer();
-        _checkPlayerMagicUse = getPlayerMagicUseCheckTimer();
-    }
+	public BattleState() {
+		_playerAttackCalculations = getPlayerAttackCalculationTimer();
+		_opponentAttackCalculations = getOpponentAttackCalculationTimer();
+		_checkPlayerMagicUse = getPlayerMagicUseCheckTimer();
+	}
 
-    public void resetDefaults(){
-        Gdx.app.debug(TAG, "Resetting defaults...");
-        _currentZoneLevel = 0;
-        _currentPlayerAP = 0;
-        _currentPlayerDP = 0;
-        _currentPlayerWandAPPoints = 0;
-        _playerAttackCalculations.cancel();
-        _opponentAttackCalculations.cancel();
-        _checkPlayerMagicUse.cancel();
-    }
+	private Timer.Task getPlayerAttackCalculationTimer() {
+		return new Timer.Task() {
+			@Override
+			public void run() {
+				int currentOpponentHP =
+					Integer.parseInt(_currentOpponent.getEntityConfig().getPropertyValue(EntityConfig.EntityProperties.ENTITY_HEALTH_POINTS.toString()));
+				int currentOpponentDP =
+					Integer.parseInt(_currentOpponent.getEntityConfig().getPropertyValue(EntityConfig.EntityProperties.ENTITY_DEFENSE_POINTS.toString()));
 
-    public void setCurrentZoneLevel(int zoneLevel){
-        _currentZoneLevel = zoneLevel;
-    }
+				int damage = MathUtils.clamp(_currentPlayerAP - currentOpponentDP, 0, _currentPlayerAP);
 
-    public int getCurrentZoneLevel(){
-        return _currentZoneLevel;
-    }
+				Gdx.app.debug(TAG, "ENEMY HAS " + currentOpponentHP + " hit with damage: " + damage);
 
-    public boolean isOpponentReady(){
-        if( _currentZoneLevel == 0 ) return false;
-        int randomVal = MathUtils.random(1,100);
+				currentOpponentHP = MathUtils.clamp(currentOpponentHP - damage, 0, currentOpponentHP);
+				_currentOpponent.getEntityConfig().setPropertyValue(EntityConfig.EntityProperties.ENTITY_HEALTH_POINTS.toString(), String.valueOf(currentOpponentHP));
 
-        //Gdx.app.debug(TAG, "CHANGE OF ATTACK: " + _chanceOfAttack + " randomval: " + randomVal);
+				Gdx.app.debug(TAG, "Player attacks " + _currentOpponent.getEntityConfig().getEntityID() + " leaving it" +
+					" with HP: " + currentOpponentHP);
 
-        if( _chanceOfAttack > randomVal  ){
-            setCurrentOpponent();
-            return true;
-        }else{
-            return false;
-        }
-    }
+				_currentOpponent.getEntityConfig().setPropertyValue(EntityConfig.EntityProperties.ENTITY_HIT_DAMAGE_TOTAL.toString(), String.valueOf(damage));
+				if (damage > 0) {
+					BattleState.this.notify(_currentOpponent, BattleObserver.BattleEvent.OPPONENT_HIT_DAMAGE);
+				}
 
-    public void setCurrentOpponent(){
-        Gdx.app.debug(TAG, "Entered BATTLE ZONE: " + _currentZoneLevel);
-        Entity entity = MonsterFactory.getInstance().getRandomMonster(_currentZoneLevel);
-        if( entity == null ) return;
-        this._currentOpponent = entity;
-        notify(entity, BattleObserver.BattleEvent.OPPONENT_ADDED);
-    }
+				if (currentOpponentHP == 0) {
+					BattleState.this.notify(_currentOpponent, BattleObserver.BattleEvent.OPPONENT_DEFEATED);
+				}
 
-    public void playerAttacks(){
-        if( _currentOpponent == null ){
-            return;
-        }
+				BattleState.this.notify(_currentOpponent, BattleObserver.BattleEvent.PLAYER_TURN_DONE);
+			}
+		};
+	}
 
-        //Check for magic if used in attack; If we don't have enough MP, then return
-        int mpVal = ProfileManager.getInstance().getProperty("currentPlayerMP", Integer.class);
-        notify(_currentOpponent, BattleObserver.BattleEvent.PLAYER_TURN_START);
+	private Timer.Task getOpponentAttackCalculationTimer() {
+		return new Timer.Task() {
+			@Override
+			public void run() {
+				int currentOpponentHP =
+					Integer.parseInt(_currentOpponent.getEntityConfig().getPropertyValue(EntityConfig.EntityProperties.ENTITY_HEALTH_POINTS.toString()));
 
-        if( _currentPlayerWandAPPoints == 0 ){
-            if( !_playerAttackCalculations.isScheduled() ){
-                Timer.schedule(_playerAttackCalculations, 1);
-            }
-        }else if(_currentPlayerWandAPPoints > mpVal ){
-            BattleState.this.notify(_currentOpponent, BattleObserver.BattleEvent.PLAYER_TURN_DONE);
-        }else{
-            if( !_checkPlayerMagicUse.isScheduled() && !_playerAttackCalculations.isScheduled() ){
-                Timer.schedule(_checkPlayerMagicUse, .5f);
-                Timer.schedule(_playerAttackCalculations, 1);
-            }
-        }
-    }
+				if (currentOpponentHP <= 0) {
+					BattleState.this.notify(_currentOpponent, BattleObserver.BattleEvent.OPPONENT_TURN_DONE);
+					return;
+				}
 
-    public void opponentAttacks(){
-        if( _currentOpponent == null ){
-            return;
-        }
+				int currentOpponentAP =
+					Integer.parseInt(_currentOpponent.getEntityConfig().getPropertyValue(EntityConfig.EntityProperties.ENTITY_ATTACK_POINTS.toString()));
+				int damage = MathUtils.clamp(currentOpponentAP - _currentPlayerDP, 0, currentOpponentAP);
+				int hpVal = ProfileManager.getInstance().getProperty("currentPlayerHP", Integer.class);
+				hpVal = MathUtils.clamp(hpVal - damage, 0, hpVal);
+				ProfileManager.getInstance().setProperty("currentPlayerHP", hpVal);
 
-        if( !_opponentAttackCalculations.isScheduled() ){
-            Timer.schedule(_opponentAttackCalculations, 1);
-        }
-    }
+				if (damage > 0) {
+					BattleState.this.notify(_currentOpponent, BattleObserver.BattleEvent.PLAYER_HIT_DAMAGE);
+				}
 
-    private Timer.Task getPlayerMagicUseCheckTimer(){
-        return new Timer.Task() {
-            @Override
-            public void run() {
-                int mpVal = ProfileManager.getInstance().getProperty("currentPlayerMP", Integer.class);
-                mpVal -= _currentPlayerWandAPPoints;
-                ProfileManager.getInstance().setProperty("currentPlayerMP", mpVal);
-                BattleState.this.notify(_currentOpponent, BattleObserver.BattleEvent.PLAYER_USED_MAGIC);
-            }
-        };
-    }
+				Gdx.app.debug(TAG,
+					"Player HIT for " + damage + " BY " + _currentOpponent.getEntityConfig().getEntityID() + " leaving" +
+						" player with HP: " + hpVal);
 
-    private Timer.Task getPlayerAttackCalculationTimer() {
-        return new Timer.Task() {
-            @Override
-            public void run() {
-                int currentOpponentHP = Integer.parseInt(_currentOpponent.getEntityConfig().getPropertyValue(EntityConfig.EntityProperties.ENTITY_HEALTH_POINTS.toString()));
-                int currentOpponentDP = Integer.parseInt(_currentOpponent.getEntityConfig().getPropertyValue(EntityConfig.EntityProperties.ENTITY_DEFENSE_POINTS.toString()));
+				BattleState.this.notify(_currentOpponent, BattleObserver.BattleEvent.OPPONENT_TURN_DONE);
+			}
+		};
+	}
 
-                int damage = MathUtils.clamp(_currentPlayerAP - currentOpponentDP, 0, _currentPlayerAP);
+	private Timer.Task getPlayerMagicUseCheckTimer() {
+		return new Timer.Task() {
+			@Override
+			public void run() {
+				int mpVal = ProfileManager.getInstance().getProperty("currentPlayerMP", Integer.class);
+				mpVal -= _currentPlayerWandAPPoints;
+				ProfileManager.getInstance().setProperty("currentPlayerMP", mpVal);
+				BattleState.this.notify(_currentOpponent, BattleObserver.BattleEvent.PLAYER_USED_MAGIC);
+			}
+		};
+	}
 
-                Gdx.app.debug(TAG, "ENEMY HAS " + currentOpponentHP + " hit with damage: " + damage);
+	public void resetDefaults() {
+		Gdx.app.debug(TAG, "Resetting defaults...");
+		_currentZoneLevel = 0;
+		_currentPlayerAP = 0;
+		_currentPlayerDP = 0;
+		_currentPlayerWandAPPoints = 0;
+		_playerAttackCalculations.cancel();
+		_opponentAttackCalculations.cancel();
+		_checkPlayerMagicUse.cancel();
+	}
 
-                currentOpponentHP = MathUtils.clamp(currentOpponentHP - damage, 0, currentOpponentHP);
-                _currentOpponent.getEntityConfig().setPropertyValue(EntityConfig.EntityProperties.ENTITY_HEALTH_POINTS.toString(), String.valueOf(currentOpponentHP));
+	public int getCurrentZoneLevel() {
+		return _currentZoneLevel;
+	}
 
-                Gdx.app.debug(TAG, "Player attacks " + _currentOpponent.getEntityConfig().getEntityID() + " leaving it with HP: " + currentOpponentHP);
+	public void setCurrentZoneLevel(int zoneLevel) {
+		_currentZoneLevel = zoneLevel;
+	}
 
-                _currentOpponent.getEntityConfig().setPropertyValue(EntityConfig.EntityProperties.ENTITY_HIT_DAMAGE_TOTAL.toString(), String.valueOf(damage));
-                if( damage > 0 ){
-                    BattleState.this.notify(_currentOpponent, BattleObserver.BattleEvent.OPPONENT_HIT_DAMAGE);
-                }
+	public boolean isOpponentReady() {
+		if (_currentZoneLevel == 0) return false;
+		int randomVal = MathUtils.random(1, 100);
 
-                if (currentOpponentHP == 0) {
-                    BattleState.this.notify(_currentOpponent, BattleObserver.BattleEvent.OPPONENT_DEFEATED);
-                }
+		//Gdx.app.debug(TAG, "CHANGE OF ATTACK: " + _chanceOfAttack + " randomval: " + randomVal);
 
-                BattleState.this.notify(_currentOpponent, BattleObserver.BattleEvent.PLAYER_TURN_DONE);
-            }
-        };
-    }
+		if (_chanceOfAttack > randomVal) {
+			setCurrentOpponent();
+			return true;
+		} else {
+			return false;
+		}
+	}
 
-    private Timer.Task getOpponentAttackCalculationTimer() {
-        return new Timer.Task() {
-            @Override
-            public void run() {
-                int currentOpponentHP = Integer.parseInt(_currentOpponent.getEntityConfig().getPropertyValue(EntityConfig.EntityProperties.ENTITY_HEALTH_POINTS.toString()));
+	public void setCurrentOpponent() {
+		Gdx.app.debug(TAG, "Entered BATTLE ZONE: " + _currentZoneLevel);
+		Entity entity = MonsterFactory.getInstance().getRandomMonster(_currentZoneLevel);
+		if (entity == null) return;
+		this._currentOpponent = entity;
+		notify(entity, BattleObserver.BattleEvent.OPPONENT_ADDED);
+	}
 
-                if (currentOpponentHP <= 0) {
-                    BattleState.this.notify(_currentOpponent, BattleObserver.BattleEvent.OPPONENT_TURN_DONE);
-                    return;
-                }
+	public void playerAttacks() {
+		if (_currentOpponent == null) {
+			return;
+		}
 
-                int currentOpponentAP = Integer.parseInt(_currentOpponent.getEntityConfig().getPropertyValue(EntityConfig.EntityProperties.ENTITY_ATTACK_POINTS.toString()));
-                int damage = MathUtils.clamp(currentOpponentAP - _currentPlayerDP, 0, currentOpponentAP);
-                int hpVal = ProfileManager.getInstance().getProperty("currentPlayerHP", Integer.class);
-                hpVal = MathUtils.clamp( hpVal - damage, 0, hpVal);
-                ProfileManager.getInstance().setProperty("currentPlayerHP", hpVal);
+		//Check for magic if used in attack; If we don't have enough MP, then return
+		int mpVal = ProfileManager.getInstance().getProperty("currentPlayerMP", Integer.class);
+		notify(_currentOpponent, BattleObserver.BattleEvent.PLAYER_TURN_START);
 
-                if( damage > 0 ) {
-                    BattleState.this.notify(_currentOpponent, BattleObserver.BattleEvent.PLAYER_HIT_DAMAGE);
-                }
+		if (_currentPlayerWandAPPoints == 0) {
+			if (!_playerAttackCalculations.isScheduled()) {
+				Timer.schedule(_playerAttackCalculations, 1);
+			}
+		} else if (_currentPlayerWandAPPoints > mpVal) {
+			BattleState.this.notify(_currentOpponent, BattleObserver.BattleEvent.PLAYER_TURN_DONE);
+		} else {
+			if (!_checkPlayerMagicUse.isScheduled() && !_playerAttackCalculations.isScheduled()) {
+				Timer.schedule(_checkPlayerMagicUse, .5f);
+				Timer.schedule(_playerAttackCalculations, 1);
+			}
+		}
+	}
 
-                Gdx.app.debug(TAG, "Player HIT for " + damage + " BY " + _currentOpponent.getEntityConfig().getEntityID() + " leaving player with HP: " + hpVal);
+	public void playerRuns() {
+		int randomVal = MathUtils.random(1, 100);
+		if (_chanceOfEscape > randomVal) {
+			notify(_currentOpponent, BattleObserver.BattleEvent.PLAYER_RUNNING);
+		} else if (randomVal > _criticalChance) {
+			opponentAttacks();
+		} else {
+		}
+	}
 
-                BattleState.this.notify(_currentOpponent, BattleObserver.BattleEvent.OPPONENT_TURN_DONE);
-            }
-        };
-    }
+	public void opponentAttacks() {
+		if (_currentOpponent == null) {
+			return;
+		}
 
-    public void playerRuns(){
-        int randomVal = MathUtils.random(1,100);
-        if( _chanceOfEscape > randomVal  ) {
-            notify(_currentOpponent, BattleObserver.BattleEvent.PLAYER_RUNNING);
-        }else if (randomVal > _criticalChance){
-            opponentAttacks();
-        }else{
-        }
-    }
+		if (!_opponentAttackCalculations.isScheduled()) {
+			Timer.schedule(_opponentAttackCalculations, 1);
+		}
+	}
 
-    @Override
-    public void onNotify(String value, InventoryEvent event) {
-        switch(event) {
-            case UPDATED_AP:
-                int apVal = Integer.valueOf(value);
-                _currentPlayerAP = apVal;
-                //Gdx.app.debug(TAG, "APVAL: " + _currentPlayerAP);
-                break;
-            case UPDATED_DP:
-                int dpVal = Integer.valueOf(value);
-                _currentPlayerDP = dpVal;
-                //Gdx.app.debug(TAG, "DPVAL: " + _currentPlayerDP);
-                break;
-            case ADD_WAND_AP:
-                int wandAP = Integer.valueOf(value);
-                _currentPlayerWandAPPoints += wandAP;
-                Gdx.app.debug(TAG, "WandAP: " + _currentPlayerWandAPPoints);
-                break;
-            case REMOVE_WAND_AP:
-                int removeWandAP = Integer.valueOf(value);
-                _currentPlayerWandAPPoints -= removeWandAP;
-                Gdx.app.debug(TAG, "WandAP: " + _currentPlayerWandAPPoints);
-                break;
-            default:
-                break;
-        }
-    }
+	@Override
+	public void onNotify(String value, InventoryEvent event) {
+		switch (event) {
+			case UPDATED_AP:
+				int apVal = Integer.valueOf(value);
+				_currentPlayerAP = apVal;
+				//Gdx.app.debug(TAG, "APVAL: " + _currentPlayerAP);
+				break;
+			case UPDATED_DP:
+				int dpVal = Integer.valueOf(value);
+				_currentPlayerDP = dpVal;
+				//Gdx.app.debug(TAG, "DPVAL: " + _currentPlayerDP);
+				break;
+			case ADD_WAND_AP:
+				int wandAP = Integer.valueOf(value);
+				_currentPlayerWandAPPoints += wandAP;
+				Gdx.app.debug(TAG, "WandAP: " + _currentPlayerWandAPPoints);
+				break;
+			case REMOVE_WAND_AP:
+				int removeWandAP = Integer.valueOf(value);
+				_currentPlayerWandAPPoints -= removeWandAP;
+				Gdx.app.debug(TAG, "WandAP: " + _currentPlayerWandAPPoints);
+				break;
+			default:
+				break;
+		}
+	}
 }

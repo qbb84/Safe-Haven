@@ -22,7 +22,7 @@
 				"TARGET_LOCATION": {
 					"class": "java.lang.String",
 					"value": "TOWN"
-			}
+				}
 			},
 			"id": 2,
 			"taskPhrase": "Please find my missing baby!",
@@ -41,7 +41,7 @@
 				"TARGET_LOCATION": {
 					"class": "java.lang.String",
 					"value": "TOWN"
-			}
+				}
 			},
 			"id": 1,
 			"taskPhrase": "Give me my baby!",
@@ -50,12 +50,12 @@
 	},
 	"questTaskDependencies": {
 		"1": [
-		{
-			"class": "com.packtpub.libgdx.safehaven.quest.QuestTaskDependency",
-			"sourceId": 1,
-			"destinationId": 2
-		}
+			{
+				"class": "libgdx.safehaven.quest.QuestTaskDependency",
+				"sourceId": 1,
+				"destinationId": 2
+			}
 		],
 		"2": []
-}
+	}
 }

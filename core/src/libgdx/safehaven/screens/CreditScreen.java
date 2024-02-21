@@ -16,93 +16,94 @@ import libgdx.safehaven.Utility;
 public class CreditScreen extends GameScreen {
 	private static final String CREDITS_PATH = "licenses/credits.txt";
 	private final Stage _stage;
-    private ScrollPane _scrollPane;
 	private final SafeHaven _game;
+	private ScrollPane _scrollPane;
 
-    public CreditScreen(SafeHaven game){
-        _game = game;
-        _stage = new Stage();
-        Gdx.input.setInputProcessor(_stage);
+	public CreditScreen(SafeHaven game) {
+		_game = game;
+		_stage = new Stage();
+		Gdx.input.setInputProcessor(_stage);
 
-        //Get text
-        FileHandle file = Gdx.files.internal(CREDITS_PATH);
-        String textString = file.readString();
+		//Get text
+		FileHandle file = Gdx.files.internal(CREDITS_PATH);
+		String textString = file.readString();
 
-        Label text = new Label(textString, Utility.STATUSUI_SKIN, "credits");
-        text.setAlignment(Align.top | Align.center);
-        text.setWrap(true);
+		Label text = new Label(textString, Utility.STATUSUI_SKIN, "credits");
+		text.setAlignment(Align.top | Align.center);
+		text.setWrap(true);
 
-        _scrollPane = new ScrollPane(text);
-        _scrollPane.addListener(new ClickListener() {
-                                    @Override
-                                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                        return true;
-                                    }
+		_scrollPane = new ScrollPane(text);
+		_scrollPane.addListener(new ClickListener() {
+									@Override
+									public boolean touchDown(InputEvent event, float x, float y, int pointer,
+															 int button) {
+										return true;
+									}
 
-                                    @Override
-                                    public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                                        _scrollPane.setScrollY(0);
-                                        _scrollPane.updateVisualScroll();
-                                        _game.setScreen(_game.getScreenType(SafeHaven.ScreenType.MainMenu));
-                                    }
-                               }
-        );
+									@Override
+									public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+										_scrollPane.setScrollY(0);
+										_scrollPane.updateVisualScroll();
+										_game.setScreen(_game.getScreenType(SafeHaven.ScreenType.MainMenu));
+									}
+								}
+		);
 
-        Table table = new Table();
-        table.center();
-        table.setFillParent(true);
-        table.defaults().width(Gdx.graphics.getWidth());
-        table.add(_scrollPane);
+		Table table = new Table();
+		table.center();
+		table.setFillParent(true);
+		table.defaults().width(Gdx.graphics.getWidth());
+		table.add(_scrollPane);
 
-        _stage.addActor(table);
-    }
+		_stage.addActor(table);
+	}
 
-    @Override
-    public void render(float delta) {
-        if( delta == 0){
-            return;
-        }
+	@Override
+	public void show() {
+		_scrollPane.setVisible(true);
+		Gdx.input.setInputProcessor(_stage);
+	}
 
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+	@Override
+	public void render(float delta) {
+		if (delta == 0) {
+			return;
+		}
 
-        _stage.act(delta);
-        _stage.draw();
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        _scrollPane.setScrollY(_scrollPane.getScrollY()+delta*20);
-    }
+		_stage.act(delta);
+		_stage.draw();
 
-    @Override
-    public void resize(int width, int height) {
-        _stage.getViewport().setScreenSize(width, height);
-    }
+		_scrollPane.setScrollY(_scrollPane.getScrollY() + delta * 20);
+	}
 
-    @Override
-    public void show() {
-        _scrollPane.setVisible(true);
-        Gdx.input.setInputProcessor(_stage);
-    }
+	@Override
+	public void resize(int width, int height) {
+		_stage.getViewport().setScreenSize(width, height);
+	}
 
-    @Override
-    public void hide() {
-        _scrollPane.setVisible(false);
-        _scrollPane.setScrollY(0);
-        _scrollPane.updateVisualScroll();
-        Gdx.input.setInputProcessor(null);
-    }
+	@Override
+	public void pause() {
+	}
 
-    @Override
-    public void pause() {
-    }
+	@Override
+	public void resume() {
+	}
 
-    @Override
-    public void resume() {
-    }
+	@Override
+	public void hide() {
+		_scrollPane.setVisible(false);
+		_scrollPane.setScrollY(0);
+		_scrollPane.updateVisualScroll();
+		Gdx.input.setInputProcessor(null);
+	}
 
-    @Override
-    public void dispose() {
-        _stage.clear();
-        _scrollPane = null;
-        _stage.dispose();
-    }
+	@Override
+	public void dispose() {
+		_stage.clear();
+		_scrollPane = null;
+		_stage.dispose();
+	}
 }

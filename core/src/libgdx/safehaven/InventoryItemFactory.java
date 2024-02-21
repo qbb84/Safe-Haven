@@ -13,41 +13,42 @@ import java.util.Hashtable;
 
 public class InventoryItemFactory {
 
+	private static InventoryItemFactory _instance = null;
 	private final Json _json = new Json();
-    private final String INVENTORY_ITEM = "scripts/inventory_items.json";
-    private static InventoryItemFactory _instance = null;
+	private final String INVENTORY_ITEM = "scripts/inventory_items.json";
 	private final Hashtable<ItemTypeID, InventoryItem> _inventoryItemList;
 
-    public static InventoryItemFactory getInstance() {
-        if (_instance == null) {
-            _instance = new InventoryItemFactory();
-        }
+	private InventoryItemFactory() {
+		ArrayList<JsonValue> list = _json.fromJson(ArrayList.class, Gdx.files.internal(INVENTORY_ITEM));
+		_inventoryItemList = new Hashtable<ItemTypeID, InventoryItem>();
 
-        return _instance;
-    }
+		for (JsonValue jsonVal : list) {
+			InventoryItem inventoryItem = _json.readValue(InventoryItem.class, jsonVal);
+			_inventoryItemList.put(inventoryItem.getItemTypeID(), inventoryItem);
+		}
+	}
 
-    private InventoryItemFactory(){
-        ArrayList<JsonValue> list = _json.fromJson(ArrayList.class, Gdx.files.internal(INVENTORY_ITEM));
-        _inventoryItemList = new Hashtable<ItemTypeID, InventoryItem>();
+	public static InventoryItemFactory getInstance() {
+		if (_instance == null) {
+			_instance = new InventoryItemFactory();
+		}
 
-        for (JsonValue jsonVal : list) {
-            InventoryItem inventoryItem = _json.readValue(InventoryItem.class, jsonVal);
-            _inventoryItemList.put(inventoryItem.getItemTypeID(), inventoryItem);
-        }
-    }
+		return _instance;
+	}
 
-    public InventoryItem getInventoryItem(ItemTypeID inventoryItemType){
-        InventoryItem item = new InventoryItem(_inventoryItemList.get(inventoryItemType));
-        item.setDrawable(new TextureRegionDrawable(Utility.ITEMS_TEXTUREATLAS.findRegion(item.getItemTypeID().toString())));
-        item.setScaling(Scaling.none);
-        return item;
-    }
+	public InventoryItem getInventoryItem(ItemTypeID inventoryItemType) {
+		InventoryItem item = new InventoryItem(_inventoryItemList.get(inventoryItemType));
+		item.setDrawable(new TextureRegionDrawable(Utility.ITEMS_TEXTUREATLAS.findRegion(item.getItemTypeID().toString())));
+		item.setScaling(Scaling.none);
+		return item;
+	}
 
     /*
     public void testAllItemLoad(){
         for(ItemTypeID itemTypeID : ItemTypeID.values()) {
             InventoryItem item = new InventoryItem(_inventoryItemList.get(itemTypeID));
-            item.setDrawable(new TextureRegionDrawable(PlayerHUD.itemsTextureAtlas.findRegion(item.getItemTypeID().toString())));
+            item.setDrawable(new TextureRegionDrawable(PlayerHUD.itemsTextureAtlas.findRegion(item.getItemTypeID()
+            .toString())));
             item.setScaling(Scaling.none);
         }
     }*/

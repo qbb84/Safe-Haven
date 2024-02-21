@@ -2,7 +2,11 @@
 
 ## Project Overview
 
-Safe Haven is built using LibGDX, following the principles outlined in the book Mastering LibGDX. The game features an entity component system design pattern, intricate inventory systems, HUD layouts for UI, serialization for saving/loading progress, dynamic dialog trees, captivating quests, and even dramatic instances. The inclusion of shop and store UIs adds depth to the in-game experience, while screen transitions seamlessly guide players through different aspects of the game.
+Safe Haven is built using LibGDX, following the principles outlined in the book Mastering LibGDX. The game features an
+entity component system design pattern, intricate inventory systems, HUD layouts for UI, serialization for
+saving/loading progress, dynamic dialog trees, captivating quests, and even dramatic instances. The inclusion of shop
+and store UIs adds depth to the in-game experience, while screen transitions seamlessly guide players through different
+aspects of the game.
 
 <details>
   <summary>Screenshots</summary>
@@ -20,7 +24,8 @@ Safe Haven is built using LibGDX, following the principles outlined in the book 
 - **Entity Component System (ECS) Design Pattern:** Efficient and flexible ECS architecture.
 - **Inventory System:** Manage items, equipment, and resources with a robust inventory system.
 - **HUD Layouts:** Utilize Heads-Up-Display (HUD) layouts for clear and intuitive user interfaces.
-- **Serialization (Saving/Loading):** Save and load game progress with a serialization system, ensuring players can continue their adventures seamlessly.
+- **Serialization (Saving/Loading):** Save and load game progress with a serialization system, ensuring players can
+  continue their adventures seamlessly.
 - **Dialog Trees:** Dynamic and branching dialogues with an easy-to-use dialog tree system.
 - **Shop and Store UIs:** Shop and store interfaces for players to buy and sell items.
 - **Quest System:** Quests to provide players with goals and challenges.
@@ -30,11 +35,12 @@ Safe Haven is built using LibGDX, following the principles outlined in the book 
 
 ## Tools Used
 
-- **LibGDX** 
-- **Tiled** 
-- **Audacity** 
-- **Packr** 
-- **Proguard** 
+- **LibGDX**
+- **Tiled**
+- **Audacity**
+- **Packr**
+- **Proguard**
 
 ## Release
+
 Find the latest release [here](https://github.com/qbb84/Safe-Haven/releases).

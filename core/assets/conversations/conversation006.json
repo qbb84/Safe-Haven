@@ -11,25 +11,25 @@
 		"3": {
 			"id": 3,
 			"dialog": "Ok"
-        }
+		}
 	},
 	"associatedChoices": {
 		"1": [
-                {
-					"class": "com.packtpub.libgdx.safehaven.dialog.ConversationChoice",
-					"sourceId": 1,
-					"destinationId": 2,
-					"choicePhrase": "Yes, of course I will help you!",
-					"conversationCommandEvent": "ACCEPT_QUEST"
-				},
-                {
-					"class": "com.packtpub.libgdx.safehaven.dialog.ConversationChoice",
-					"sourceId": 1,
-					"destinationId": 3,
-					"choicePhrase": "No, sorry, I can't help you.",
-					"conversationCommandEvent": "EXIT_CONVERSATION"
-                }
-	        ]
+			{
+				"class": "libgdx.safehaven.dialog.ConversationChoice",
+				"sourceId": 1,
+				"destinationId": 2,
+				"choicePhrase": "Yes, of course I will help you!",
+				"conversationCommandEvent": "ACCEPT_QUEST"
+			},
+			{
+				"class": "libgdx.safehaven.dialog.ConversationChoice",
+				"sourceId": 1,
+				"destinationId": 3,
+				"choicePhrase": "No, sorry, I can't help you.",
+				"conversationCommandEvent": "EXIT_CONVERSATION"
+			}
+		]
 	},
 	"currentConversationID": 1
 }

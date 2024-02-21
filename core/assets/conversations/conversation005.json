@@ -11,25 +11,25 @@
 		"3": {
 			"id": 3,
 			"dialog": "Ok"
-        }
+		}
 	},
 	"associatedChoices": {
 		"1": [
-                {
-					"class": "com.packtpub.libgdx.safehaven.dialog.ConversationChoice",
-					"sourceId": 1,
-					"destinationId": 2,
-					"choicePhrase": "Yes",
-					"conversationCommandEvent": "ADD_ENTITY_TO_INVENTORY"
-				},
-                {
-					"class": "com.packtpub.libgdx.safehaven.dialog.ConversationChoice",
-					"sourceId": 1,
-					"destinationId": 3,
-					"choicePhrase": "No",
-					"conversationCommandEvent": "EXIT_CONVERSATION"
-                }
-	        ]
+			{
+				"class": "libgdx.safehaven.dialog.ConversationChoice",
+				"sourceId": 1,
+				"destinationId": 2,
+				"choicePhrase": "Yes",
+				"conversationCommandEvent": "ADD_ENTITY_TO_INVENTORY"
+			},
+			{
+				"class": "libgdx.safehaven.dialog.ConversationChoice",
+				"sourceId": 1,
+				"destinationId": 3,
+				"choicePhrase": "No",
+				"conversationCommandEvent": "EXIT_CONVERSATION"
+			}
+		]
 	},
 	"currentConversationID": 1
 }

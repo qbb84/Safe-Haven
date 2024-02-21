@@ -15,37 +15,17 @@ import libgdx.safehaven.profile.ProfileManager;
 
 public class MainGameScreen extends GameScreen {
 	private static final String TAG = MainGameScreen.class.getSimpleName();
-
-	public static class VIEWPORT {
-		public static float viewportWidth;
-		public static float viewportHeight;
-		public static float virtualWidth;
-		public static float virtualHeight;
-		public static float physicalWidth;
-		public static float physicalHeight;
-		public static float aspectRatio;
-	}
-
-	private final Json _json;
 	private static GameState _gameState;
-
-	protected OrthogonalTiledMapRenderer _mapRenderer = null;
-	protected MapManager _mapMgr;
-	protected OrthographicCamera _camera = null;
-	protected OrthographicCamera _hudCamera = null;
+	private final Json _json;
 	private final SafeHaven _game;
 	private final InputMultiplexer _multiplexer;
 	private final Entity _player;
 	private final PlayerHUD _playerHUD;
-	public enum GameState {
-		SAVING,
-		LOADING,
-		RUNNING,
-		PAUSED,
-		GAME_OVER
-	}
-
-	public MainGameScreen(SafeHaven game){
+	protected OrthogonalTiledMapRenderer _mapRenderer = null;
+	protected MapManager _mapMgr;
+	protected OrthographicCamera _camera = null;
+	protected OrthographicCamera _hudCamera = null;
+	public MainGameScreen(SafeHaven game) {
 		_game = game;
 		_mapMgr = new MapManager();
 		_json = new Json();
@@ -76,6 +56,70 @@ public class MainGameScreen extends GameScreen {
 		//Gdx.app.debug(TAG, "UnitScale value is: " + _mapRenderer.getUnitScale());
 	}
 
+	public static void setGameState(GameState gameState) {
+		switch (gameState) {
+			case RUNNING:
+				_gameState = GameState.RUNNING;
+				break;
+			case LOADING:
+				ProfileManager.getInstance().loadProfile();
+				_gameState = GameState.RUNNING;
+				break;
+			case SAVING:
+				ProfileManager.getInstance().saveProfile();
+				_gameState = GameState.PAUSED;
+				break;
+			case PAUSED:
+				if (_gameState == GameState.PAUSED) {
+					_gameState = GameState.RUNNING;
+				} else if (_gameState == GameState.RUNNING) {
+					_gameState = GameState.PAUSED;
+				}
+				break;
+			case GAME_OVER:
+				_gameState = GameState.GAME_OVER;
+				break;
+			default:
+				_gameState = GameState.RUNNING;
+				break;
+		}
+
+	}
+
+	private void setupViewport(int width, int height) {
+		//Make the viewport a percentage of the total display area
+		VIEWPORT.virtualWidth = width;
+		VIEWPORT.virtualHeight = height;
+
+		//Current viewport dimensions
+		VIEWPORT.viewportWidth = VIEWPORT.virtualWidth;
+		VIEWPORT.viewportHeight = VIEWPORT.virtualHeight;
+
+		//pixel dimensions of display
+		VIEWPORT.physicalWidth = Gdx.graphics.getWidth();
+		VIEWPORT.physicalHeight = Gdx.graphics.getHeight();
+
+		//aspect ratio for current viewport
+		VIEWPORT.aspectRatio = (VIEWPORT.virtualWidth / VIEWPORT.virtualHeight);
+
+		//update viewport if there could be skewing
+		if (VIEWPORT.physicalWidth / VIEWPORT.physicalHeight >= VIEWPORT.aspectRatio) {
+			//Letterbox left and right
+			VIEWPORT.viewportWidth = VIEWPORT.viewportHeight * (VIEWPORT.physicalWidth / VIEWPORT.physicalHeight);
+			VIEWPORT.viewportHeight = VIEWPORT.virtualHeight;
+		} else {
+			//letterbox above and below
+			VIEWPORT.viewportWidth = VIEWPORT.virtualWidth;
+			VIEWPORT.viewportHeight = VIEWPORT.viewportWidth * (VIEWPORT.physicalHeight / VIEWPORT.physicalWidth);
+		}
+
+		Gdx.app.debug(TAG, "WorldRenderer: virtual: (" + VIEWPORT.virtualWidth + "," + VIEWPORT.virtualHeight + ")");
+		Gdx.app.debug(TAG, "WorldRenderer: viewport: (" + VIEWPORT.viewportWidth + "," + VIEWPORT.viewportHeight +
+			")");
+		Gdx.app.debug(TAG, "WorldRenderer: physical: (" + VIEWPORT.physicalWidth + "," + VIEWPORT.physicalHeight +
+			")");
+	}
+
 	@Override
 	public void show() {
 		ProfileManager.getInstance().addObserver(_mapMgr);
@@ -85,27 +129,18 @@ public class MainGameScreen extends GameScreen {
 		Gdx.input.setInputProcessor(_multiplexer);
 
 
-		if( _mapRenderer == null ){
+		if (_mapRenderer == null) {
 			_mapRenderer = new OrthogonalTiledMapRenderer(_mapMgr.getCurrentTiledMap(), Map.UNIT_SCALE);
 		}
 	}
 
 	@Override
-	public void hide() {
-		if( _gameState != GameState.GAME_OVER ){
-			setGameState(GameState.SAVING);
-		}
-
-		Gdx.input.setInputProcessor(null);
-	}
-
-	@Override
 	public void render(float delta) {
-		if( _gameState == GameState.GAME_OVER ){
+		if (_gameState == GameState.GAME_OVER) {
 			_game.setScreen(_game.getScreenType(SafeHaven.ScreenType.GameOver));
 		}
 
-		if( _gameState == GameState.PAUSED ){
+		if (_gameState == GameState.PAUSED) {
 			_player.updateInput(delta);
 			_playerHUD.render(delta);
 			return;
@@ -118,9 +153,10 @@ public class MainGameScreen extends GameScreen {
 		_mapRenderer.getBatch().enableBlending();
 		_mapRenderer.getBatch().setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
-		if( _mapMgr.hasMapChanged() ){
+		if (_mapMgr.hasMapChanged()) {
 			_mapRenderer.setMap(_mapMgr.getCurrentTiledMap());
-			_player.sendMessage(Component.MESSAGE.INIT_START_POSITION, _json.toJson(_mapMgr.getPlayerStartUnitScaled()));
+			_player.sendMessage(Component.MESSAGE.INIT_START_POSITION,
+				_json.toJson(_mapMgr.getPlayerStartUnitScaled()));
 
 			_camera.position.set(_mapMgr.getPlayerStartUnitScaled().x, _mapMgr.getPlayerStartUnitScaled().y, 0f);
 			_camera.update();
@@ -133,23 +169,26 @@ public class MainGameScreen extends GameScreen {
 		}
 
 		_mapMgr.updateLightMaps(_playerHUD.getCurrentTimeOfDay());
-		TiledMapImageLayer lightMap = (TiledMapImageLayer)_mapMgr.getCurrentLightMapLayer();
-		TiledMapImageLayer previousLightMap = (TiledMapImageLayer)_mapMgr.getPreviousLightMapLayer();
+		TiledMapImageLayer lightMap = (TiledMapImageLayer) _mapMgr.getCurrentLightMapLayer();
+		TiledMapImageLayer previousLightMap = (TiledMapImageLayer) _mapMgr.getPreviousLightMapLayer();
 
-		if( lightMap != null) {
+		if (lightMap != null) {
 			_mapRenderer.getBatch().begin();
-			TiledMapTileLayer backgroundMapLayer = (TiledMapTileLayer)_mapMgr.getCurrentTiledMap().getLayers().get(Map.BACKGROUND_LAYER);
-			if( backgroundMapLayer != null ){
+			TiledMapTileLayer backgroundMapLayer =
+				(TiledMapTileLayer) _mapMgr.getCurrentTiledMap().getLayers().get(Map.BACKGROUND_LAYER);
+			if (backgroundMapLayer != null) {
 				_mapRenderer.renderTileLayer(backgroundMapLayer);
 			}
 
-			TiledMapTileLayer groundMapLayer = (TiledMapTileLayer)_mapMgr.getCurrentTiledMap().getLayers().get(Map.GROUND_LAYER);
-			if( groundMapLayer != null ){
+			TiledMapTileLayer groundMapLayer =
+				(TiledMapTileLayer) _mapMgr.getCurrentTiledMap().getLayers().get(Map.GROUND_LAYER);
+			if (groundMapLayer != null) {
 				_mapRenderer.renderTileLayer(groundMapLayer);
 			}
 
-			TiledMapTileLayer decorationMapLayer = (TiledMapTileLayer)_mapMgr.getCurrentTiledMap().getLayers().get(Map.DECORATION_LAYER);
-			if( decorationMapLayer != null ){
+			TiledMapTileLayer decorationMapLayer =
+				(TiledMapTileLayer) _mapMgr.getCurrentTiledMap().getLayers().get(Map.DECORATION_LAYER);
+			if (decorationMapLayer != null) {
 				_mapRenderer.renderTileLayer(decorationMapLayer);
 			}
 
@@ -166,14 +205,14 @@ public class MainGameScreen extends GameScreen {
 			_mapRenderer.getBatch().setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 			_mapRenderer.getBatch().end();
 
-			if( previousLightMap != null ){
+			if (previousLightMap != null) {
 				_mapRenderer.getBatch().begin();
 				_mapRenderer.getBatch().setBlendFunction(GL20.GL_DST_COLOR, GL20.GL_ONE_MINUS_SRC_COLOR);
 				_mapRenderer.renderImageLayer(previousLightMap);
 				_mapRenderer.getBatch().setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 				_mapRenderer.getBatch().end();
 			}
-		}else{
+		} else {
 			_mapRenderer.render();
 			_mapMgr.updateCurrentMapEntities(_mapMgr, _mapRenderer.getBatch(), delta);
 			_player.update(_mapMgr, _mapRenderer.getBatch(), delta);
@@ -203,13 +242,22 @@ public class MainGameScreen extends GameScreen {
 	}
 
 	@Override
+	public void hide() {
+		if (_gameState != GameState.GAME_OVER) {
+			setGameState(GameState.SAVING);
+		}
+
+		Gdx.input.setInputProcessor(null);
+	}
+
+	@Override
 	public void dispose() {
-		if( _player != null ){
+		if (_player != null) {
 			_player.unregisterObservers();
 			_player.dispose();
 		}
 
-		if( _mapRenderer != null ){
+		if (_mapRenderer != null) {
 			_mapRenderer.dispose();
 		}
 
@@ -217,65 +265,21 @@ public class MainGameScreen extends GameScreen {
 		MapFactory.clearCache();
 	}
 
-	public static void setGameState(GameState gameState){
-		switch(gameState){
-			case RUNNING:
-				_gameState = GameState.RUNNING;
-				break;
-			case LOADING:
-				ProfileManager.getInstance().loadProfile();
-				_gameState = GameState.RUNNING;
-				break;
-			case SAVING:
-				ProfileManager.getInstance().saveProfile();
-				_gameState = GameState.PAUSED;
-				break;
-			case PAUSED:
-				if( _gameState == GameState.PAUSED ){
-					_gameState = GameState.RUNNING;
-				}else if( _gameState == GameState.RUNNING ){
-					_gameState = GameState.PAUSED;
-				}
-				break;
-			case GAME_OVER:
-				_gameState = GameState.GAME_OVER;
-				break;
-			default:
-				_gameState = GameState.RUNNING;
-				break;
-		}
-
+	public enum GameState {
+		SAVING,
+		LOADING,
+		RUNNING,
+		PAUSED,
+		GAME_OVER
 	}
 
-	private void setupViewport(int width, int height){
-		//Make the viewport a percentage of the total display area
-		VIEWPORT.virtualWidth = width;
-		VIEWPORT.virtualHeight = height;
-
-		//Current viewport dimensions
-		VIEWPORT.viewportWidth = VIEWPORT.virtualWidth;
-		VIEWPORT.viewportHeight = VIEWPORT.virtualHeight;
-
-		//pixel dimensions of display
-		VIEWPORT.physicalWidth = Gdx.graphics.getWidth();
-		VIEWPORT.physicalHeight = Gdx.graphics.getHeight();
-
-		//aspect ratio for current viewport
-		VIEWPORT.aspectRatio = (VIEWPORT.virtualWidth / VIEWPORT.virtualHeight);
-
-		//update viewport if there could be skewing
-		if( VIEWPORT.physicalWidth / VIEWPORT.physicalHeight >= VIEWPORT.aspectRatio){
-			//Letterbox left and right
-			VIEWPORT.viewportWidth = VIEWPORT.viewportHeight * (VIEWPORT.physicalWidth/VIEWPORT.physicalHeight);
-			VIEWPORT.viewportHeight = VIEWPORT.virtualHeight;
-		}else{
-			//letterbox above and below
-			VIEWPORT.viewportWidth = VIEWPORT.virtualWidth;
-			VIEWPORT.viewportHeight = VIEWPORT.viewportWidth * (VIEWPORT.physicalHeight/VIEWPORT.physicalWidth);
-		}
-
-		Gdx.app.debug(TAG, "WorldRenderer: virtual: (" + VIEWPORT.virtualWidth + "," + VIEWPORT.virtualHeight + ")" );
-		Gdx.app.debug(TAG, "WorldRenderer: viewport: (" + VIEWPORT.viewportWidth + "," + VIEWPORT.viewportHeight + ")" );
-		Gdx.app.debug(TAG, "WorldRenderer: physical: (" + VIEWPORT.physicalWidth + "," + VIEWPORT.physicalHeight + ")" );
+	public static class VIEWPORT {
+		public static float viewportWidth;
+		public static float viewportHeight;
+		public static float virtualWidth;
+		public static float virtualHeight;
+		public static float physicalWidth;
+		public static float physicalHeight;
+		public static float aspectRatio;
 	}
 }

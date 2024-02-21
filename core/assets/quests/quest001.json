@@ -41,7 +41,7 @@
 				"TARGET_LOCATION": {
 					"class": "java.lang.String",
 					"value": "TOP_WORLD"
-			}
+				}
 			},
 			"id": 3,
 			"taskPhrase": "Collect 5 furs",
@@ -64,7 +64,7 @@
 				"TARGET_LOCATION": {
 					"class": "java.lang.String",
 					"value": "TOP_WORLD"
-			}
+				}
 			},
 			"id": 2,
 			"taskPhrase": "Collect 5 horns",
@@ -83,7 +83,7 @@
 				"TARGET_LOCATION": {
 					"class": "java.lang.String",
 					"value": "TOWN"
-			}
+				}
 			},
 			"id": 1,
 			"taskPhrase": "Come back to me with the items",
@@ -93,30 +93,30 @@
 	"questTaskDependencies": {
 		"4": [],
 		"3": [
-		{
-			"class": "com.packtpub.libgdx.safehaven.quest.QuestTaskDependency",
-			"sourceId": 3,
-			"destinationId": 4
-		}
+			{
+				"class": "libgdx.safehaven.quest.QuestTaskDependency",
+				"sourceId": 3,
+				"destinationId": 4
+			}
 		],
 		"2": [
-		{
-			"class": "com.packtpub.libgdx.safehaven.quest.QuestTaskDependency",
-			"sourceId": 2,
-			"destinationId": 4
-		}
+			{
+				"class": "libgdx.safehaven.quest.QuestTaskDependency",
+				"sourceId": 2,
+				"destinationId": 4
+			}
 		],
 		"1": [
-		{
-			"class": "com.packtpub.libgdx.safehaven.quest.QuestTaskDependency",
-			"sourceId": 1,
-			"destinationId": 2
-		},
-		{
-			"class": "com.packtpub.libgdx.safehaven.quest.QuestTaskDependency",
-			"sourceId": 1,
-			"destinationId": 3
-		}
-	]
-}
+			{
+				"class": "libgdx.safehaven.quest.QuestTaskDependency",
+				"sourceId": 1,
+				"destinationId": 2
+			},
+			{
+				"class": "libgdx.safehaven.quest.QuestTaskDependency",
+				"sourceId": 1,
+				"destinationId": 3
+			}
+		]
+	}
 }

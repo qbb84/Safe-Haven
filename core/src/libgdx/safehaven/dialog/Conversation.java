@@ -1,26 +1,26 @@
 package libgdx.safehaven.dialog;
 
 public class Conversation {
-    private String id;
-    private String dialog = "";
+	private String id;
+	private String dialog = "";
 
-    public Conversation(){
-    }
+	public Conversation() {
+	}
 
-    public String getId() {
-        return id;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setId(String id){
-        this.id = id;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getDialog(){
-        return dialog;
-    }
+	public String getDialog() {
+		return dialog;
+	}
 
-    public void setDialog(String dialog){
-        this.dialog = dialog;
-    }
+	public void setDialog(String dialog) {
+		this.dialog = dialog;
+	}
 
 }

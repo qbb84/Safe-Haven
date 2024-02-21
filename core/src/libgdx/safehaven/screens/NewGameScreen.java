@@ -19,14 +19,14 @@ public class NewGameScreen extends GameScreen {
 	private final TextField _profileText;
 	private final Dialog _overwriteDialog;
 
-	public NewGameScreen(SafeHaven game){
+	public NewGameScreen(SafeHaven game) {
 		_game = game;
 
 		//create
 		_stage = new Stage();
 
 		Label profileName = new Label("Enter Profile Name: ", Utility.STATUSUI_SKIN);
-		_profileText  = new TextField("",Utility.STATUSUI_SKIN, "inventory");
+		_profileText = new TextField("", Utility.STATUSUI_SKIN, "inventory");
 		_profileText.setMaxLength(20);
 
 		_overwriteDialog = new Dialog("Overwrite?", Utility.STATUSUI_SKIN, "solidbackground");
@@ -66,12 +66,13 @@ public class NewGameScreen extends GameScreen {
 		cancelButton.addListener(new ClickListener() {
 
 									 @Override
-									 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button ){
+									 public boolean touchDown(InputEvent event, float x, float y, int pointer,
+															  int button) {
 										 return true;
 									 }
 
 									 @Override
-									 public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+									 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 										 _overwriteDialog.hide();
 									 }
 								 }
@@ -80,18 +81,21 @@ public class NewGameScreen extends GameScreen {
 		overwriteButton.addListener(new ClickListener() {
 
 										@Override
-										public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+										public boolean touchDown(InputEvent event, float x, float y, int pointer,
+																 int button) {
 											return true;
 										}
 
 										@Override
-										public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+										public void touchUp(InputEvent event, float x, float y, int pointer,
+															int button) {
 											String messageText = _profileText.getText();
 											ProfileManager.getInstance().writeProfileToStorage(messageText, "", true);
 											ProfileManager.getInstance().setCurrentProfile(messageText);
 											ProfileManager.getInstance().setIsNewProfile(true);
 											_overwriteDialog.hide();
-											NewGameScreen.this.notify(AudioObserver.AudioCommand.MUSIC_STOP, AudioObserver.AudioTypeEvent.MUSIC_TITLE);
+											NewGameScreen.this.notify(AudioObserver.AudioCommand.MUSIC_STOP,
+												AudioObserver.AudioTypeEvent.MUSIC_TITLE);
 											_game.setScreen(_game.getScreenType(ScreenType.MainGame));
 										}
 
@@ -101,26 +105,28 @@ public class NewGameScreen extends GameScreen {
 		startButton.addListener(new ClickListener() {
 
 									@Override
-									public boolean touchDown(InputEvent event, float x, float y, int pointer, int button ){
+									public boolean touchDown(InputEvent event, float x, float y, int pointer,
+															 int button) {
 										return true;
 									}
 
 									@Override
-									public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+									public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 										String messageText = _profileText.getText();
 										//check to see if the current profile matches one that already exists
 										boolean exists = false;
 
 										exists = ProfileManager.getInstance().doesProfileExist(messageText);
 
-										if( exists ){
+										if (exists) {
 											//Pop up dialog for Overwrite
 											_overwriteDialog.show(_stage);
-										}else{
-											ProfileManager.getInstance().writeProfileToStorage(messageText,"",false);
+										} else {
+											ProfileManager.getInstance().writeProfileToStorage(messageText, "", false);
 											ProfileManager.getInstance().setCurrentProfile(messageText);
 											ProfileManager.getInstance().setIsNewProfile(true);
-											NewGameScreen.this.notify(AudioObserver.AudioCommand.MUSIC_STOP, AudioObserver.AudioTypeEvent.MUSIC_TITLE);
+											NewGameScreen.this.notify(AudioObserver.AudioCommand.MUSIC_STOP,
+												AudioObserver.AudioTypeEvent.MUSIC_TITLE);
 											_game.setScreen(_game.getScreenType(ScreenType.MainGame));
 										}
 									}
@@ -130,34 +136,18 @@ public class NewGameScreen extends GameScreen {
 		backButton.addListener(new ClickListener() {
 
 								   @Override
-								   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+								   public boolean touchDown(InputEvent event, float x, float y, int pointer,
+															int button) {
 									   return true;
 								   }
 
 								   @Override
-								   public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+								   public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 									   _game.setScreen(_game.getScreenType(ScreenType.MainMenu));
 								   }
 							   }
 		);
 
-	}
-
-	@Override
-	public void render(float delta) {
-		if( delta == 0){
-			return;
-		}
-
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        _stage.act(delta);
-        _stage.draw();
-	}
-
-	@Override
-	public void resize(int width, int height) {
-		_stage.getViewport().setScreenSize(width, height);
 	}
 
 	@Override
@@ -168,10 +158,20 @@ public class NewGameScreen extends GameScreen {
 	}
 
 	@Override
-	public void hide() {
-		_overwriteDialog.hide();
-		_profileText.setText("");
-		Gdx.input.setInputProcessor(null);
+	public void render(float delta) {
+		if (delta == 0) {
+			return;
+		}
+
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		_stage.act(delta);
+		_stage.draw();
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		_stage.getViewport().setScreenSize(width, height);
 	}
 
 	@Override
@@ -183,11 +183,17 @@ public class NewGameScreen extends GameScreen {
 	}
 
 	@Override
+	public void hide() {
+		_overwriteDialog.hide();
+		_profileText.setText("");
+		Gdx.input.setInputProcessor(null);
+	}
+
+	@Override
 	public void dispose() {
 		_stage.clear();
 		_stage.dispose();
 	}
-
 
 
 }

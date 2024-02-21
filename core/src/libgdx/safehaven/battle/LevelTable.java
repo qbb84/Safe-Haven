@@ -8,54 +8,54 @@ import com.badlogic.gdx.utils.JsonValue;
 import java.util.ArrayList;
 
 public class LevelTable {
-    private String levelID;
-    private int xpMax;
-    private int hpMax;
-    private int mpMax;
+	private String levelID;
+	private int xpMax;
+	private int hpMax;
+	private int mpMax;
 
-    public String getLevelID() {
-        return levelID;
-    }
+	static public Array<LevelTable> getLevelTables(String configFilePath) {
+		Json json = new Json();
+		Array<LevelTable> levelTable = new Array<LevelTable>();
 
-    public void setLevelID(String levelID) {
-        this.levelID = levelID;
-    }
+		ArrayList<JsonValue> list = json.fromJson(ArrayList.class, Gdx.files.internal(configFilePath));
 
-    public int getXpMax() {
-        return xpMax;
-    }
+		for (JsonValue jsonVal : list) {
+			LevelTable table = json.readValue(LevelTable.class, jsonVal);
+			levelTable.add(table);
+		}
 
-    public void setXpMax(int xpMax) {
-        this.xpMax = xpMax;
-    }
+		return levelTable;
+	}
 
-    public int getHpMax() {
-        return hpMax;
-    }
+	public String getLevelID() {
+		return levelID;
+	}
 
-    public void setHpMax(int hpMax) {
-        this.hpMax = hpMax;
-    }
+	public void setLevelID(String levelID) {
+		this.levelID = levelID;
+	}
 
-    public int getMpMax() {
-        return mpMax;
-    }
+	public int getXpMax() {
+		return xpMax;
+	}
 
-    public void setMpMax(int mpMax) {
-        this.mpMax = mpMax;
-    }
+	public void setXpMax(int xpMax) {
+		this.xpMax = xpMax;
+	}
 
-    static public Array<LevelTable> getLevelTables(String configFilePath){
-        Json json = new Json();
-        Array<LevelTable> levelTable = new Array<LevelTable>();
+	public int getHpMax() {
+		return hpMax;
+	}
 
-        ArrayList<JsonValue> list = json.fromJson(ArrayList.class, Gdx.files.internal(configFilePath));
+	public void setHpMax(int hpMax) {
+		this.hpMax = hpMax;
+	}
 
-        for (JsonValue jsonVal : list) {
-            LevelTable table = json.readValue(LevelTable.class, jsonVal);
-            levelTable.add(table);
-        }
+	public int getMpMax() {
+		return mpMax;
+	}
 
-        return levelTable;
-    }
+	public void setMpMax(int mpMax) {
+		this.mpMax = mpMax;
+	}
 }

@@ -27,80 +27,80 @@
 	},
 	"associatedChoices": {
 		"1": [
-                {
-					"class": "com.packtpub.libgdx.safehaven.dialog.ConversationChoice",
-					"sourceId": 1,
-					"destinationId": 2,
-					"choicePhrase": "Next",
-					"conversationCommandEvent": "NONE"
-                }
+			{
+				"class": "libgdx.safehaven.dialog.ConversationChoice",
+				"sourceId": 1,
+				"destinationId": 2,
+				"choicePhrase": "Next",
+				"conversationCommandEvent": "NONE"
+			}
 		],
 		"2": [
-                {
-					"class": "com.packtpub.libgdx.safehaven.dialog.ConversationChoice",
-					"sourceId": 2,
-					"destinationId": 3,
-					"choicePhrase": "North",
-					"conversationCommandEvent": "NONE"
-				},
-                {
-					"class": "com.packtpub.libgdx.safehaven.dialog.ConversationChoice",
-					"sourceId": 2,
-					"destinationId": 4,
-					"choicePhrase": "East",
-					"conversationCommandEvent": "NONE"
-				},
-				{
-					"class": "com.packtpub.libgdx.safehaven.dialog.ConversationChoice",
-					"sourceId": 2,
-					"destinationId": 5,
-					"choicePhrase": "West",
-					"conversationCommandEvent": "NONE"
-				},
-				{
-					"class": "com.packtpub.libgdx.safehaven.dialog.ConversationChoice",
-					"sourceId": 2,
-					"destinationId": 6,
-					"choicePhrase": "South",
-					"conversationCommandEvent": "NONE"
-                }
+			{
+				"class": "libgdx.safehaven.dialog.ConversationChoice",
+				"sourceId": 2,
+				"destinationId": 3,
+				"choicePhrase": "North",
+				"conversationCommandEvent": "NONE"
+			},
+			{
+				"class": "libgdx.safehaven.dialog.ConversationChoice",
+				"sourceId": 2,
+				"destinationId": 4,
+				"choicePhrase": "East",
+				"conversationCommandEvent": "NONE"
+			},
+			{
+				"class": "libgdx.safehaven.dialog.ConversationChoice",
+				"sourceId": 2,
+				"destinationId": 5,
+				"choicePhrase": "West",
+				"conversationCommandEvent": "NONE"
+			},
+			{
+				"class": "libgdx.safehaven.dialog.ConversationChoice",
+				"sourceId": 2,
+				"destinationId": 6,
+				"choicePhrase": "South",
+				"conversationCommandEvent": "NONE"
+			}
 		],
 		"3": [
-                {
-					"class": "com.packtpub.libgdx.safehaven.dialog.ConversationChoice",
-					"sourceId": 3,
-					"destinationId": 1,
-					"choicePhrase": "Go to beginning!",
-					"conversationCommandEvent": "NONE"
-                }
+			{
+				"class": "libgdx.safehaven.dialog.ConversationChoice",
+				"sourceId": 3,
+				"destinationId": 1,
+				"choicePhrase": "Go to beginning!",
+				"conversationCommandEvent": "NONE"
+			}
 		],
 		"4": [
-                {
-					"class": "com.packtpub.libgdx.safehaven.dialog.ConversationChoice",
-					"sourceId": 4,
-					"destinationId": 1,
-					"choicePhrase": "Go to beginning!",
-					"conversationCommandEvent": "NONE"
-                }
+			{
+				"class": "libgdx.safehaven.dialog.ConversationChoice",
+				"sourceId": 4,
+				"destinationId": 1,
+				"choicePhrase": "Go to beginning!",
+				"conversationCommandEvent": "NONE"
+			}
 		],
 		"5": [
-                {
-					"class": "com.packtpub.libgdx.safehaven.dialog.ConversationChoice",
-					"sourceId": 5,
-					"destinationId": 1,
-					"choicePhrase": "Go to beginning!",
-					"conversationCommandEvent": "NONE"
-                }
+			{
+				"class": "libgdx.safehaven.dialog.ConversationChoice",
+				"sourceId": 5,
+				"destinationId": 1,
+				"choicePhrase": "Go to beginning!",
+				"conversationCommandEvent": "NONE"
+			}
 		],
 		"6": [
-                {
-					"class": "com.packtpub.libgdx.safehaven.dialog.ConversationChoice",
-					"sourceId": 6,
-					"destinationId": 1,
-					"choicePhrase": "Go to beginning!",
-					"conversationCommandEvent": "NONE"
-                }
-        ]
+			{
+				"class": "libgdx.safehaven.dialog.ConversationChoice",
+				"sourceId": 6,
+				"destinationId": 1,
+				"choicePhrase": "Go to beginning!",
+				"conversationCommandEvent": "NONE"
+			}
+		]
 	},
 	"currentConversationID": 1
 }

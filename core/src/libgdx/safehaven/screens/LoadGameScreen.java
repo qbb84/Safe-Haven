@@ -22,13 +22,13 @@ public class LoadGameScreen extends GameScreen {
 	private final SafeHaven _game;
 	private final List _listItems;
 
-	public LoadGameScreen(SafeHaven game){
+	public LoadGameScreen(SafeHaven game) {
 		_game = game;
 
 		//create
 		_stage = new Stage();
 		TextButton loadButton = new TextButton("Load", Utility.STATUSUI_SKIN);
-		TextButton backButton = new TextButton("Back",Utility.STATUSUI_SKIN);
+		TextButton backButton = new TextButton("Back", Utility.STATUSUI_SKIN);
 
 		ProfileManager.getInstance().storeAllProfiles();
 		_listItems = new List(Utility.STATUSUI_SKIN, "inventory");
@@ -62,12 +62,13 @@ public class LoadGameScreen extends GameScreen {
 		//Listeners
 		backButton.addListener(new ClickListener() {
 								   @Override
-								   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+								   public boolean touchDown(InputEvent event, float x, float y, int pointer,
+															int button) {
 									   return true;
 								   }
 
 								   @Override
-								   public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+								   public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 									   _game.setScreen(_game.getScreenType(SafeHaven.ScreenType.MainMenu));
 								   }
 							   }
@@ -75,19 +76,21 @@ public class LoadGameScreen extends GameScreen {
 
 		loadButton.addListener(new ClickListener() {
 								   @Override
-								   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+								   public boolean touchDown(InputEvent event, float x, float y, int pointer,
+															int button) {
 									   return true;
 								   }
 
 								   @Override
-								   public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-									   if( _listItems.getSelected() == null ) return;
+								   public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+									   if (_listItems.getSelected() == null) return;
 									   String fileName = _listItems.getSelected().toString();
 									   if (fileName != null && !fileName.isEmpty()) {
 										   FileHandle file = ProfileManager.getInstance().getProfileFile(fileName);
 										   if (file != null) {
 											   ProfileManager.getInstance().setCurrentProfile(fileName);
-											   LoadGameScreen.this.notify(AudioObserver.AudioCommand.MUSIC_STOP, AudioObserver.AudioTypeEvent.MUSIC_TITLE);
+											   LoadGameScreen.this.notify(AudioObserver.AudioCommand.MUSIC_STOP,
+												   AudioObserver.AudioTypeEvent.MUSIC_TITLE);
 											   _game.setScreen(_game.getScreenType(SafeHaven.ScreenType.MainGame));
 										   }
 									   }
@@ -98,13 +101,20 @@ public class LoadGameScreen extends GameScreen {
 	}
 
 	@Override
+	public void show() {
+		Array<String> list = ProfileManager.getInstance().getProfileList();
+		_listItems.setItems(list);
+		Gdx.input.setInputProcessor(_stage);
+	}
+
+	@Override
 	public void render(float delta) {
-		if( delta == 0){
+		if (delta == 0) {
 			return;
 		}
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		_stage.act(delta);
 		_stage.draw();
 	}
@@ -115,23 +125,16 @@ public class LoadGameScreen extends GameScreen {
 	}
 
 	@Override
-	public void show() {
-		Array<String> list = ProfileManager.getInstance().getProfileList();
-		_listItems.setItems(list);
-		Gdx.input.setInputProcessor(_stage);
-	}
-
-	@Override
-	public void hide() {
-		Gdx.input.setInputProcessor(null);
-	}
-
-	@Override
 	public void pause() {
 	}
 
 	@Override
 	public void resume() {
+	}
+
+	@Override
+	public void hide() {
+		Gdx.input.setInputProcessor(null);
 	}
 
 	@Override

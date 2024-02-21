@@ -9,18 +9,18 @@
 	"inventory": [
 	],
 	"animationConfig": [
-	{
-		"frameDuration": 1.0,
-		"animationType": "IMMOBILE",
-		"texturePaths": [
-			"sprites/items/Flesh.png"
-		],
-		"gridPoints": [
-			{
-				"x": 8,
-				"y": 4
-			}
-		]
-	}
-]
+		{
+			"frameDuration": 1.0,
+			"animationType": "IMMOBILE",
+			"texturePaths": [
+				"sprites/items/Flesh.png"
+			],
+			"gridPoints": [
+				{
+					"x": 8,
+					"y": 4
+				}
+			]
+		}
+	]
 }

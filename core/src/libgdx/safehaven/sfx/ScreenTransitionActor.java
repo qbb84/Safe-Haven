@@ -9,35 +9,35 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class ScreenTransitionActor extends Image {
-    private Color _transitionColor = Color.BLACK;
+	private Color _transitionColor = Color.BLACK;
 
-    public ScreenTransitionActor(){
-        init();
-    }
+	public ScreenTransitionActor() {
+		init();
+	}
 
-    public ScreenTransitionActor(Color color){
-        this._transitionColor = color;
+	private void init() {
+		toFront();
+		setFillParent(true);
 
-        init();
-    }
+		Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+		pixmap.setColor(_transitionColor);
+		pixmap.fill();
+		setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(pixmap))));
+		clearListeners();
+		setTouchable(Touchable.disabled);
+	}
 
-    private void init(){
-        toFront();
-        setFillParent(true);
+	public ScreenTransitionActor(Color color) {
+		this._transitionColor = color;
 
-        Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pixmap.setColor(_transitionColor);
-        pixmap.fill();
-        setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(pixmap))));
-        clearListeners();
-        setTouchable(Touchable.disabled);
-    }
+		init();
+	}
 
-    public Color getTransitionColor() {
-        return _transitionColor;
-    }
+	public Color getTransitionColor() {
+		return _transitionColor;
+	}
 
-    public void setTransitionColor(Color transitionColor) {
-        this._transitionColor = transitionColor;
-    }
+	public void setTransitionColor(Color transitionColor) {
+		this._transitionColor = transitionColor;
+	}
 }

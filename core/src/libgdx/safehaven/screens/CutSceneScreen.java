@@ -244,7 +244,8 @@ public class CutSceneScreen extends MainGameScreen {
 				new Runnable() {
 					@Override
 					public void run() {
-						showMessage("BLACKSMITH: We have planned this long enough. The time is now! I have had enough" +
+						showMessage("BLACKSMITH: We have planned this long enough. The time is now! I have had " +
+							"enough" +
 							" " +
 							"talk...");
 					}
@@ -263,7 +264,8 @@ public class CutSceneScreen extends MainGameScreen {
 				new Runnable() {
 					@Override
 					public void run() {
-						showMessage("INNKEEPER: Both of you need to keep it down. If we get caught using black magic," +
+						showMessage("INNKEEPER: Both of you need to keep it down. If we get caught using black " +
+							"magic," +
 							" " +
 							"we will all be hanged!");
 					}

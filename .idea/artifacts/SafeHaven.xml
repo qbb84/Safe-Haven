@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="SafeHaven">
+    <output-path>$USER_HOME$/Downloads</output-path>
+    <root id="archive" name="SafeHaven.jar" />
+  </artifact>
+</component>

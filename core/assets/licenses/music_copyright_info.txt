@@ -1,0 +1,42 @@
+Title: "Random Battle"
+Author:  controllerhead
+Website: http://opengameart.org/content/random-battle
+License: CC0 Public Domain (http://creativecommons.org/publicdomain/zero/1.0/)
+Filename: Random Battle.mp3
+
+Title: "A Theme"
+Author:  edwinnington
+Website: http://opengameart.org/content/a-theme
+License: CC-BY 3.0 (http://creativecommons.org/licenses/by/3.0/)
+Filename: 10112013.wav
+
+Title: "Magic Town"
+Author:  controllerhead
+Website: http://opengameart.org/content/magic-town
+License: CC0 Public Domain (http://creativecommons.org/publicdomain/zero/1.0/)
+Filename: Magic Town_0.mp3
+
+Title: "Town in Ruin Loop"
+Author:  Brandon Morris
+Website: http://opengameart.org/content/town-in-ruins-loop
+License: CC-BY 3.0 (http://creativecommons.org/licenses/by/3.0/)
+Filename: n3535n5n335n35nj.ogg
+
+Title: "Takeover"
+Author:  HorrorPen
+Website: http://opengameart.org/content/takeover
+License: CC-BY 3.0 (http://creativecommons.org/licenses/by/3.0/)
+Filename: Takeover_5.mp3
+
+Title: "Dark Chamber"
+Author:  Marcelo Fernandez
+Website: http://opengameart.org/content/dark-chamber
+         http://www.marcelofernandezmusic.com/
+License: CC-BY 3.0 (http://creativecommons.org/licenses/by/3.0/)
+Filename: Dark chamber.mp3
+
+Title: "Level Finish Fanfares"
+Author:  Johan Brodd 2014
+Website: http://opengameart.org/content/level-finish-fanfares
+License: CC-BY 3.0 (http://creativecommons.org/licenses/by/3.0/)
+Filename:  Open Surge score jingle.zip

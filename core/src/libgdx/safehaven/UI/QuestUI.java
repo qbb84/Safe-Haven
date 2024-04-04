@@ -19,6 +19,7 @@ import libgdx.safehaven.quest.QuestTask;
 import java.util.ArrayList;
 
 public class QuestUI extends Window {
+
 	public static final String RETURN_QUEST = "conversations/return_quest.json";
 	public static final String FINISHED_QUEST = "conversations/quest_finished.json";
 	private static final String TAG = QuestUI.class.getSimpleName();

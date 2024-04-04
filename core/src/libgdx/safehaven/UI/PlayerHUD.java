@@ -33,6 +33,8 @@ import libgdx.safehaven.sfx.ShakeCamera;
 
 public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, ComponentObserver, ConversationGraphObserver
 	, StoreInventoryObserver, BattleObserver, InventoryObserver, StatusObserver {
+
+
 	private static final String TAG = PlayerHUD.class.getSimpleName();
 	private static final String INVENTORY_FULL = "Your inventory is full!";
 	private final Stage _stage;

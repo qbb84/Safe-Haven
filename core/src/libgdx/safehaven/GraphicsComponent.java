@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Json;
 import java.util.Hashtable;
 
 public abstract class GraphicsComponent extends ComponentSubject implements Component {
+
 	protected TextureRegion _currentFrame = null;
 	protected float _frameTime = 0f;
 	protected Entity.State _currentState;

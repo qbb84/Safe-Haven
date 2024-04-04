@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class Entity {
+
 	public static final int FRAME_WIDTH = 16;
 	public static final int FRAME_HEIGHT = 16;
 	private static final String TAG = Entity.class.getSimpleName();

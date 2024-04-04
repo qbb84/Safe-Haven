@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 
 public class EntityConfig {
+
 	private final Array<AnimationConfig> animationConfig;
 	private Array<InventoryItem.ItemTypeID> inventory;
 	private Entity.State state = Entity.State.IDLE;

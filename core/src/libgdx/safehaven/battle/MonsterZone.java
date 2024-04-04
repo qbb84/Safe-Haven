@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class MonsterZone {
+
 	private String zoneID;
 	private Array<MonsterFactory.MonsterEntityType> monsters;
 

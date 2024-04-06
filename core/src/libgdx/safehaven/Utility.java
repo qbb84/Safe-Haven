@@ -24,8 +24,10 @@ public final class Utility {
 	private final static String ITEMS_TEXTURE_ATLAS_PATH = "skins/items.atlas";
 	private final static String ITEMS_SKIN_PATH = "skins/items.json";
 	private final static String HELPUI_SKIN_PATH = "skins/helpui.json";
+	private final static String HELPUI_ATLAS_PATH = "skins/statusui.atlas";
 
-	public static Skin HELPUI_SKIN = new Skin(Gdx.files.internal(HELPUI_SKIN_PATH));
+	// Now loading both the JSON and the atlas
+	public static Skin HELPUI_SKIN = new Skin(Gdx.files.internal(HELPUI_SKIN_PATH), new TextureAtlas(Gdx.files.internal(HELPUI_ATLAS_PATH)));
 	public static TextureAtlas STATUSUI_TEXTUREATLAS = new TextureAtlas(STATUSUI_TEXTURE_ATLAS_PATH);
 	public static Skin STATUSUI_SKIN = new Skin(Gdx.files.internal(STATUSUI_SKIN_PATH), STATUSUI_TEXTUREATLAS);
 	public static TextureAtlas ITEMS_TEXTUREATLAS = new TextureAtlas(ITEMS_TEXTURE_ATLAS_PATH);

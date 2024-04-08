@@ -7,11 +7,6 @@ Safe Haven is built using LibGDX. The game features an entity component system d
 <details>
   <summary>Screenshots</summary>
 
-  <p float="left">
-    <img src="/rm-images/safehaven1.png" alt="Screenshot 1" width="300" />
-    <img src="/rm-images/safebar.png" alt="Screenshot 2" width="300" />
-  </p>
-
 
 </details>
 

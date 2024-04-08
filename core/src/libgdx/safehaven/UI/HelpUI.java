@@ -37,7 +37,8 @@ public class HelpUI extends Window {
 		contentTable.add(howToPlayLabel).pad(100).row();
 
 		Label story = new Label("Story:\n - Your task is to defeat the bosses, and battle enemies.\n " +
-			"You can complete quests to earn coins to spend at the shops. The quest will also help you complete the game linearly", Utility.HELPUI_SKIN);
+			"You can complete quests to earn coins to spend at the shops.\n" +
+			"Additionally, the quests will also help you complete the game linearly", Utility.HELPUI_SKIN);
 		story.setAlignment(Align.center);
 		contentTable.add(story).pad(100).width(contentTable.getWidth() - 20).row();
 

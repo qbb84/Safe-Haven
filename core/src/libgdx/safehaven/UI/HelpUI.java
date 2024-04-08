@@ -1,6 +1,7 @@
 package libgdx.safehaven.UI;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
@@ -30,9 +31,16 @@ public class HelpUI extends Window {
 		contentTable = new Table();
 		contentTable.setFillParent(true);
 
-		Label howToPlayLabel = new Label("How to Play:\n - Use arrow keys or WASD to move\n", Utility.HELPUI_SKIN);
+
+		Label howToPlayLabel = new Label("TIP:\n - Use arrow keys or WASD to move\n", Utility.HELPUI_SKIN);
 		howToPlayLabel.setAlignment(Align.center);
-		contentTable.add(howToPlayLabel).pad(10);
+		contentTable.add(howToPlayLabel).pad(100).row();
+
+		Label story = new Label("Story:\n - Your task is to defeat the bosses, and battle enemies.\n " +
+			"You can complete quests to earn coins to spend at the shops. The quest will also help you complete the game linearly", Utility.HELPUI_SKIN);
+		story.setAlignment(Align.center);
+		contentTable.add(story).pad(100).width(contentTable.getWidth() - 20).row();
+
 
 
 		this.add(contentTable).fill().expand();

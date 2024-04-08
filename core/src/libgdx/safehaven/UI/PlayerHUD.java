@@ -561,7 +561,7 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
 	public void onNotify(String value, StoreInventoryEvent event) {
 		switch (event) {
 			case PLAYER_GP_TOTAL_UPDATED:
-				int val = Integer.valueOf(value);
+				int val = Integer.parseInt(value);
 				_statusUI.setGoldValue(val);
 				notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_COIN_RUSTLE);
 				break;
@@ -626,6 +626,7 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
 		_battleUI.resize();
 
 		_helpUI.setPosition((_stage.getWidth() - _helpUI.getWidth()) / 2, (_stage.getHeight() - _helpUI.getHeight()) / 2);
+		_helpUI.setScale(_stage.getHeight() / _stage.getHeight());
 	}
 
 	@Override

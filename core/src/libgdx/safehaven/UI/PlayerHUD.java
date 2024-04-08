@@ -1,10 +1,12 @@
 package libgdx.safehaven.UI;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
@@ -54,6 +56,7 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
 	private final ScreenTransitionActor _transitionActor;
 	private final ShakeCamera _shakeCam;
 	private final ClockActor _clock;
+	private final HelpUI _helpUI;
 
 	public PlayerHUD(Camera camera, Entity player, MapManager mapMgr) {
 		_camera = camera;
@@ -123,6 +126,21 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
 		_questUI.setPosition(0, _stage.getHeight() / 2);
 		_questUI.setWidth(_stage.getWidth());
 		_questUI.setHeight(_stage.getHeight() / 2);
+
+		_helpUI = new HelpUI();
+		_stage.addActor(_helpUI);
+		_helpUI.setPosition((_stage.getWidth() - _helpUI.getWidth()) / 2, (_stage.getHeight() - _helpUI.getHeight()) / 2);
+		_stage.addListener(new InputListener() {
+			@Override
+			public boolean keyDown(InputEvent event, int keycode) {
+				if (keycode == Input.Keys.ESCAPE) {
+					_helpUI.toggleVisibility();
+					return true;
+				}
+				return false; // Event was not handled
+			}
+		});
+
 
 		_battleUI = new BattleUI();
 		_battleUI.setMovable(false);
@@ -606,6 +624,8 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
 		_stage.getViewport().update(width, height, true);
 		_battleUI.validate();
 		_battleUI.resize();
+
+		_helpUI.setPosition((_stage.getWidth() - _helpUI.getWidth()) / 2, (_stage.getHeight() - _helpUI.getHeight()) / 2);
 	}
 
 	@Override

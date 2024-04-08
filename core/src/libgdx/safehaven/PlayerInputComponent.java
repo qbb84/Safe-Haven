@@ -104,6 +104,9 @@ public class PlayerInputComponent extends InputComponent {
 		if (keycode == Input.Keys.P) {
 			this.pausePressed();
 		}
+		if (keycode == Input.Keys.ESCAPE) {
+			this.escapePressed();
+		}
 
 		return true;
 	}
@@ -128,6 +131,7 @@ public class PlayerInputComponent extends InputComponent {
 		if (keycode == Input.Keys.P) {
 			this.pauseReleased();
 		}
+
 		return true;
 	}
 
@@ -220,6 +224,10 @@ public class PlayerInputComponent extends InputComponent {
 	}
 
 	//Key presses
+	public void escapePressed() {
+		keys.put(Keys.ESCAPE, true);
+	}
+
 	public void leftPressed() {
 		keys.put(Keys.LEFT, true);
 	}

@@ -1,10 +1,12 @@
 package libgdx.safehaven.UI;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import javafx.stage.Screen;
 import libgdx.safehaven.Utility;
 
 public class HelpUI extends Window {
@@ -13,8 +15,10 @@ public class HelpUI extends Window {
 	private final InventorySlotTooltip _inventorySlotTooltip;
 	private Table contentTable;
 
+
+
 	public HelpUI() {
-		super("Help", Utility.HELPUI_SKIN, "solidbackground");
+		super("Help", Utility.HELPUI_SKIN, "default");
 
 		_observers = new Array<InventoryObserver>();
 		_inventorySlotTooltip = new InventorySlotTooltip(Utility.HELPUI_SKIN);
@@ -33,14 +37,14 @@ public class HelpUI extends Window {
 
 		this.add(contentTable).fill().expand();
 		this.pack();
-		this.setMovable(true);
-		this.setPosition(100, 100);
+		this.setMovable(false);
 
 		this.setVisible(false);
 	}
 
 	public void toggleVisibility() {
 		this.setVisible(!this.isVisible());
+		System.out.println("HelpUI " + "Toggling visibility: now " + (this.isVisible() ? "visible" : "hidden"));
 	}
 
 }

@@ -11,6 +11,11 @@
 			"font": "default-font",
 			"fontColor": "white"
 		}
+		"inventory-item-count": {
+			"font": "default-font",
+			"fontColor": "white" // Change this color as necessary for your design
+			// You can also specify other properties specific to this style
+		}
 	},
 	"com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
 		"default": {

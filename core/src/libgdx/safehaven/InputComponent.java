@@ -37,7 +37,7 @@ public abstract class InputComponent extends ComponentSubject implements Compone
 	public abstract void update(Entity entity, float delta);
 
 	protected enum Keys {
-		LEFT, RIGHT, UP, DOWN, QUIT, PAUSE
+		LEFT, RIGHT, UP, DOWN, QUIT, PAUSE, ESCAPE
 	}
 
 	protected enum Mouse {

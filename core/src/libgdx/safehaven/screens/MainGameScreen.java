@@ -137,6 +137,9 @@ public class MainGameScreen extends GameScreen {
 
 	@Override
 	public void render(float delta) {
+		_playerHUD.getStage().act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+		_playerHUD.getStage().draw();
+
 		if (_gameState == GameState.GAME_OVER) {
 			_game.setScreen(_game.getScreenType(SafeHaven.ScreenType.GameOver));
 		}
@@ -228,6 +231,7 @@ public class MainGameScreen extends GameScreen {
 		setupViewport(10, 10);
 		_camera.setToOrtho(false, VIEWPORT.viewportWidth, VIEWPORT.viewportHeight);
 		_playerHUD.resize((int) VIEWPORT.physicalWidth, (int) VIEWPORT.physicalHeight);
+
 	}
 
 	@Override

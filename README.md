@@ -2,13 +2,8 @@
 
 ## Project Overview
 
-Safe Haven is built using LibGDX. The game features an entity component system design pattern, intricate inventory systems, HUD layouts for UI, serialization for saving/loading progress, dynamic dialog trees, captivating quests, and even dramatic instances. The inclusion of shop and store UIs adds depth to the in-game experience, while screen transitions seamlessly guide players through different aspects of the game.
+Safe Haven is built using LibGDX. The game features an entity component system design pattern, intricate inventory systems, HUD layouts for UI, serialization for saving/loading progress, dynamic dialog trees, captivating quests, and dramatic instances. The inclusion of shop and store UIs adds depth to the in-game experience, while screen transitions seamlessly guide players through different aspects of the game.
 
-<details>
-  <summary>Screenshots</summary>
-
-
-</details>
 
 ## Features
 

@@ -24,10 +24,11 @@ public class HelpUI extends Window {
 		_observers = new Array<InventoryObserver>();
 		_inventorySlotTooltip = new InventorySlotTooltip(Utility.HELPUI_SKIN);
 
+
 		initializeLayout();
 	}
 
-	private void initializeLayout() {
+	public void initializeLayout() {
 		contentTable = new Table();
 		contentTable.setFillParent(true);
 
@@ -53,7 +54,7 @@ public class HelpUI extends Window {
 
 	public void toggleVisibility() {
 		this.setVisible(!this.isVisible());
-		System.out.println("HelpUI " + "Toggling visibility: now " + (this.isVisible() ? "visible" : "hidden"));
+		System.out.println("HelpUI Debug " + "Toggling visibility: now " + (this.isVisible() ? "visible" : "hidden"));
 	}
 
 }

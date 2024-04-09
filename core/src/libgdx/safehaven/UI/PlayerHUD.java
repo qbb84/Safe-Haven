@@ -128,8 +128,10 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
 		_questUI.setHeight(_stage.getHeight() / 2);
 
 		_helpUI = new HelpUI();
-		_stage.addActor(_helpUI);
-		_helpUI.setPosition((_stage.getWidth() - _helpUI.getWidth()) / 2, (_stage.getHeight() - _helpUI.getHeight()) / 2);
+		HelpUIComponent decoratedHelpUI = new HelpUIScrollbar(_helpUI);
+		_stage.addActor(decoratedHelpUI.getActor());
+		Actor display = decoratedHelpUI.getActor();
+		display.setPosition((_stage.getWidth() - display.getWidth()) / 2, (_stage.getHeight() - display.getHeight()) / 2);
 		_stage.addListener(new InputListener() {
 			@Override
 			public boolean keyDown(InputEvent event, int keycode) {
@@ -137,9 +139,11 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
 					_helpUI.toggleVisibility();
 					return true;
 				}
-				return false; // Event was not handled
+				return false;
 			}
 		});
+
+
 
 
 		_battleUI = new BattleUI();
